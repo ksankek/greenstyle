@@ -25,7 +25,7 @@ const Article = sequelize.define('article', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
     description: {type: DataTypes.TEXT, allowNull: false},
-    comments: {type: DataTypes.ARRAY(DataTypes.STRING)},
+    comments: {type: DataTypes.ARRAY(DataTypes.JSON)},
     files: {type: DataTypes.ARRAY(DataTypes.STRING)}
 })
 
