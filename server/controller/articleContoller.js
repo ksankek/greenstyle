@@ -32,7 +32,6 @@ class ArticleController{
                 res.status(200).json({msg:"Фото добавлено"});
             })
             .catch(err => {
-                console.log(err)
                 res.status(500).json({msg:"Ошибка"});
             });
 
@@ -41,6 +40,26 @@ class ArticleController{
             next(ApiError.badRequest(e.message));
         }
     }
+
+    async addComment(req, res, next) {
+        try {
+            const id = req.params.articleId;
+            const {comment, userId, date} = req.body;
+            const article = await Article.update({
+                    comments: Sequelize.fn('array_append', Sequelize.col('comments'),
+                        JSON.stringify({comment, userId, date}))
+                }, {where: {id:id}}
+            ).then(() => {
+                res.status(200).json({msg:"Комментарий добавлен"});
+            })
+            .catch(err => {
+                res.status(500).json({msg: err});
+            });
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+
 
     async deletePhoto(req, res, next){
         try{
