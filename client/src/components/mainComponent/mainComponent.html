@@ -1,0 +1,44 @@
+<div class="d-flex align-center justify-center flex-column">
+    <h1 class="mt-5">Админ панель</h1>
+    <div class="px-10 py-10" style="border: 2px solid black; width: 100%">
+        <h3 class="mr-auto ml-5">Пользователи</h3>
+        <div>
+            <h4>Почта</h4>
+            <v-text-field
+                    hide-details="auto"
+                    class="mb-10"
+                    v-model:value="user.email"
+            ></v-text-field>
+        </div>
+        <div>
+            <h4>Пароль</h4>
+            <v-text-field
+                    hide-details="auto"
+                    class="mb-10"
+                    v-model:value="user.password"
+            ></v-text-field>
+        </div>
+        <div>
+            <h4>Роль</h4>
+            <v-text-field
+                    hide-details="auto"
+                    class="mb-10"
+                    v-model:value="user.role"
+            ></v-text-field>
+        </div>
+        <v-btn
+                elevation="2"
+                @click="addUser()"
+        >
+            Добавить
+        </v-btn>
+        <div class="d-flex flex-column align-center" style="border: 1px solid red">
+            <h1>Пользователи</h1>
+            <div class="d-flex" v-for="user in users">
+                <p>{{user.email}}      |</p>
+                <p>| {{user.password}}  |</p>
+                <p>| ROLE: {{user.role}}</p>
+            </div>
+        </div>
+    </div>
+</div>
