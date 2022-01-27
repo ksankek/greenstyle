@@ -39,8 +39,16 @@ const Section = sequelize.define('section', {
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
 })
 
-User.hasOne(Favourite);
-Favourite.belongsTo(User);
+User.hasOne(Favourite, {
+    as: 'Favourite',
+    onDelete: 'CASCADE',
+    hooks: true,
+    foreignKey: 'userId'
+});
+Favourite.belongsTo(User, {
+    as: 'User',
+    foreignKey: 'userId'
+});
 
 Favourite.hasMany(Favourite_article);
 Favourite_article.belongsTo(Favourite);
