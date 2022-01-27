@@ -6,8 +6,11 @@ const checkRole= require("../middleware/checkRoleMiddleware");
 
 router.post("/registration", userController.registration);
 router.post("/login", userController.login);
+router.put("/:userId", authMiddleware, userController.edit);
+router.put('/photo/:userId', authMiddleware, userController.addPhoto);
+router.put('/photo/delete/:userId', authMiddleware, userController.deletePhoto);
 router.get("/auth", authMiddleware, userController.check);
-router.get("/", userController.getAllUsers);
-router.get("/:userId", userController.getUserById)
+router.get("/", checkRole('ADMIN'), userController.getAllUsers);
+router.get("/:userId", authMiddleware, userController.getUserById);
 
 module.exports = router;

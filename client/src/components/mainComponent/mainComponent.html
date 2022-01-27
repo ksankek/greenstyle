@@ -1,13 +1,12 @@
-<div class="d-flex align-center justify-center flex-column">
-    <h1 class="mt-5">Админ панель</h1>
-    <div class="px-10 py-10" style="border: 2px solid black; width: 100%">
-        <h3 class="mr-auto ml-5">Пользователи</h3>
+<div>
+    <div v-if="!isLogin">
+        <h1>Войти</h1>
         <div>
-            <h4>Почта</h4>
+            <h4>Логин</h4>
             <v-text-field
                     hide-details="auto"
                     class="mb-10"
-                    v-model:value="user.email"
+                    v-model:value="loginForm.email"
             ></v-text-field>
         </div>
         <div>
@@ -15,30 +14,104 @@
             <v-text-field
                     hide-details="auto"
                     class="mb-10"
-                    v-model:value="user.password"
-            ></v-text-field>
-        </div>
-        <div>
-            <h4>Роль</h4>
-            <v-text-field
-                    hide-details="auto"
-                    class="mb-10"
-                    v-model:value="user.role"
+                    v-model:value="loginForm.password"
             ></v-text-field>
         </div>
         <v-btn
                 elevation="2"
-                @click="addUser()"
+                @click="login()"
         >
-            Добавить
+            Войти
         </v-btn>
-        <div class="d-flex flex-column align-center" style="border: 1px solid red">
-            <h1>Пользователи</h1>
-            <div class="d-flex" v-for="user in users">
-                <p>{{user.email}}      |</p>
-                <p>| {{user.password}}  |</p>
-                <p>| ROLE: {{user.role}}</p>
+    </div>
+    <div class="d-flex align-center justify-center flex-column" v-if="isLogin && isAdmin">
+        <h1 class="mt-5">Админ панель</h1>
+        <div class="px-10 py-10" style="border: 2px solid black; width: 100%">
+            <h3 class="mr-auto ml-5">Пользователи</h3>
+            <div>
+                <h4>Почта</h4>
+                <v-text-field
+                        hide-details="auto"
+                        class="mb-10"
+                        v-model:value="user.email"
+                ></v-text-field>
+            </div>
+            <div>
+                <h4>Пароль</h4>
+                <v-text-field
+                        hide-details="auto"
+                        class="mb-10"
+                        v-model:value="user.password"
+                ></v-text-field>
+            </div>
+            <div>
+                <h4>Роль</h4>
+                <v-text-field
+                        hide-details="auto"
+                        class="mb-10"
+                        v-model:value="user.role"
+                ></v-text-field>
+            </div>
+            <v-btn
+                    elevation="2"
+                    @click="addUser()"
+            >
+                Добавить
+            </v-btn>
+            <div class="d-flex flex-column align-center" style="border: 1px solid red">
+                <h1>Пользователи</h1>
+                <div class="d-flex" v-for="user in users">
+                    <p>{{user.email}}      |</p>
+                    <p>| {{user.password}}  |</p>
+                    <p>| ROLE: {{user.role}}</p>
+                </div>
             </div>
         </div>
+    </div>
+    <div v-if="isLogin && !isAdmin" class="d-flex flex-column align-center">
+        <h1>Профиль пользователя</h1>
+        <div>
+            <h4>Имя</h4>
+            <v-text-field
+                    hide-details="auto"
+                    class="mb-10"
+                    v-model:value="activeUser.firstname"
+            ></v-text-field>
+        </div>
+        <div>
+            <h4>Фамилия</h4>
+            <v-text-field
+                    hide-details="auto"
+                    class="mb-10"
+                    v-model:value="activeUser.lastname"
+            ></v-text-field>
+        </div>
+        <div>
+            <h4>Отчество</h4>
+            <v-text-field
+                    hide-details="auto"
+                    class="mb-10"
+                    v-model:value="activeUser.patronymic"
+            ></v-text-field>
+        </div>
+        <div>
+            <h4>Телефон</h4>
+            <v-text-field
+                    hide-details="auto"
+                    class="mb-10"
+                    v-model:value="activeUser.phone"
+            ></v-text-field>
+        </div>
+        <v-btn
+                elevation="2"
+                @click="editUser(activeUser.id, {
+                    firstname: activeUser.firstname,
+                    lastname: activeUser.lastname,
+                    patronymic: activeUser.patronymic,
+                    phone: activeUser.phone
+                })"
+        >
+            Сохранить
+        </v-btn>
     </div>
 </div>
