@@ -12,5 +12,6 @@ router.put('/photo/delete/:userId', authMiddleware, userController.deletePhoto);
 router.get("/auth", authMiddleware, userController.check);
 router.get("/", checkRole('ADMIN'), userController.getAllUsers);
 router.get("/:userId", authMiddleware, userController.getUserById);
+router.delete("/:userId", userController.deleteUser);
 
 module.exports = router;

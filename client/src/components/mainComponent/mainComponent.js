@@ -19,7 +19,9 @@ export default {
                 email: 'admin@mail.ru',
                 password: '1234'
             },
-            activeUser: {}
+            activeUser: {},
+            openUserId: '',
+            token: ''
         }
     },
     created() {
@@ -42,6 +44,8 @@ export default {
             }).then(res => {
                 if (res.status === 200) {
                     console.log(res.data)
+                    const {id} = VueJwtDecode.decode(this.token);
+                    this.getUsers(id, this.token)
                 }
             })
         },
@@ -90,6 +94,7 @@ export default {
             }).then(res => {
                 if (res.status === 200) {
                     const {id} = VueJwtDecode.decode(res.data.token);
+                    this.token = res.data.token
                     this.getUsers(id, res.data.token)
                 }
             })
@@ -120,6 +125,21 @@ export default {
             }).then(res => {
                 if (res.status === 200) {
                     console.log(res.data)
+                }
+            })
+        },
+        deleteUser(id) {
+            this.$http({
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                url: `http://localhost:5000/api/user/${id}`
+            }).then(res => {
+                if (res.status === 200) {
+                    console.log(res.data)
+                    const {id} = VueJwtDecode.decode(this.token);
+                    this.getUsers(id, this.token)
                 }
             })
         }

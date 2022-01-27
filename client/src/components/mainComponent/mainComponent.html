@@ -60,10 +60,18 @@
             </v-btn>
             <div class="d-flex flex-column align-center" style="border: 1px solid red">
                 <h1>Пользователи</h1>
-                <div class="d-flex" v-for="user in users">
-                    <p>{{user.email}}      |</p>
-                    <p>| {{user.password}}  |</p>
-                    <p>| ROLE: {{user.role}}</p>
+                <div class="d-flex align-center justify-center" style="cursor: pointer" v-for="user in users" @click="openUserId = user.id">
+                    <p class="mt-5 mb-5">{{user.email}} |</p>
+                    <p class="mt-5 mb-5">| {{user.password}} |</p>
+                    <p class="mt-5 mb-5">| ROLE: {{user.role}}</p>
+                    <v-btn
+                            v-if="openUserId === user.id"
+                            elevation="2"
+                            class="ml-5"
+                            @click="deleteUser(user.id)"
+                    >
+                        Удалить
+                    </v-btn>
                 </div>
             </div>
         </div>

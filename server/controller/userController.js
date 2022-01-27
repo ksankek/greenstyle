@@ -158,6 +158,20 @@ class UserController {
             next(ApiError.badRequest(e.message));
         }
     }
+
+    async deleteUser(req, res, next) {
+        const id = req.params.userId;
+
+        User.destroy({
+            where: {id:id}
+        })
+        .then(() => {
+            res.status(200).json({msg:"Пользователь удалён"});
+        })
+        .catch(e => {
+            next(ApiError.badRequest(e.message));
+        })
+    }
 }
 
 module.exports = new UserController();
