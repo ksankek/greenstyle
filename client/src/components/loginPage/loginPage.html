@@ -1,0 +1,63 @@
+<div class="login-page d-flex">
+    <img class="login-page__image" src="../../assets/login.png" alt="login-page-image">
+    <div class="login-page__login-form d-flex flex-column align-center justify-center">
+        <h1>Вход</h1>
+        <div class="login-page__login-form-field">
+            <p class="login-page__login-form-field-title">Логин</p>
+            <b-form-input
+                    class="login-page__login-form-field-input"
+                    :class="{'login-page__login-form-field-error':error.email,
+                            'login-page__login-form-field-error':error.emailValid}"
+                    placeholder="Почта для входа"
+                    type="text"
+                    v-model="loginForm.email"
+                    @blur="[isRequired('email'), isValidEmail()]"
+            >
+            </b-form-input>
+            <animation :duration="200" :name="'slide-down-fade'" :changeHeight="true">
+                <div class="error-wrapper d-flex align-center" v-if="error.emailValid">
+                    <span class="fa-error mr-1"></span>
+                    <span>Введённая почта не валидна</span>
+                </div>
+            </animation>
+            <animation :duration="200" :name="'slide-down-fade'" :changeHeight="true">
+                <div class="error-wrapper d-flex align-center" v-if="error.email">
+                    <span class="fa-error mr-1"></span>
+                    <span>Это поле обязательно для заполнения</span>
+                </div>
+            </animation>
+        </div>
+        <div class="login-page__login-form-field">
+            <p class="login-page__login-form-field-title">Пароль</p>
+            <b-form-input
+                    class="login-page__login-form-field-input"
+                    :class="{'login-page__login-form-field-error':error.password}"
+                    placeholder="Введите пароль"
+                    type="password"
+                    v-model="loginForm.password"
+                    @blur="[isRequired('password'), isValidEmail()]"
+            >
+            </b-form-input>
+            <animation :duration="200" :name="'slide-down-fade'" :changeHeight="true">
+                <div class="error-wrapper d-flex align-center" v-if="error.password">
+                    <span class="fa-error mr-1"></span>
+                    <span>Введённая почта не валидна</span>
+                </div>
+            </animation>
+        </div>
+        <v-btn
+                class="login-form__button"
+                outlined
+                @click="reqLogin"
+                :disabled="disabledButton"
+        >
+            Войти
+        </v-btn>
+        <span class="mt-5">Ещё не зарегестрированы?
+            <span @click="$router.replace({path: '/registration'})"
+                  class="login-page__href" href="#">
+                Создать аккаунт
+            </span>
+        </span>
+    </div>
+</div>

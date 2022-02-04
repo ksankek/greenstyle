@@ -1,0 +1,50 @@
+.login-page {
+    &__image {
+        height: 100vh;
+    }
+
+    &__login-form {
+        height: 100vh;
+        width: 100vw;
+
+        &-field {
+            width: 70%;
+            margin-top: 30px;
+
+            &-title {
+                font-weight: bold;
+            }
+
+            &-input {
+                padding: 10px;
+                border: 1px solid $greenBorder;
+
+                &.form-control:focus {
+                    border-color: $greenBorder;
+                    box-shadow: 0 0 0 0.25rem $greenShadow;
+                }
+            }
+
+            &-error {
+                border: 1px solid red !important;
+            }
+        }
+    }
+
+    &__href {
+        color: $greenFont;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    .v-btn{
+        margin-top: 100px;
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+        height: 50px !important;
+        width: 70%;
+        background: $greenBorder;
+        border: none;
+        color: white !important;
+    }
+}
