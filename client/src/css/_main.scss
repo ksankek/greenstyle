@@ -1,0 +1,10 @@
+//variables
+$greenBorder: #628272;
+$greenFont: #83AAA9;
+$greenShadow: #94bda8;
+
+//import
+@import './icons.scss',
+
+        'components/template.scss',
+        'components/loginPage.scss';
