@@ -20,6 +20,30 @@ export default new Vuex.Store({
         },
         PERMISSION: state => {
             return state.permission
+        },
+        NAV_LINKS: () => {
+            return [
+                {
+                    name: 'Спорт',
+                    icon: 'sport',
+                    route: '/sport'
+                },
+                {
+                    name: 'Правильное питание',
+                    icon: 'apple',
+                    route: '/food'
+                },
+                {
+                    name: 'Вредные привычки',
+                    icon: 'alcohol',
+                    route: '/sport'
+                },
+                {
+                    name: 'Видеогалерея',
+                    icon: 'video',
+                    route: '/video'
+                },
+            ]
         }
     },
     mutations: {

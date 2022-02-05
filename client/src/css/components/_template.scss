@@ -1,5 +1,27 @@
+.app {
+    display: flex;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    padding: 0 !important;
+
+    > .wrapper {
+        min-height: 100vh;
+        flex: 1;
+        display: flex;
+
+        & span {
+            letter-spacing: 1px;
+        }
+    }
+}
+
 .error-wrapper {
     & span {
         color: red;
     }
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }

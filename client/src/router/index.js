@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import MainComponent from "@/components/mainComponent/mainComponent.vue";
+import SportPage from "@/components/pages/sportPage.vue";
 import LoginPage from "@/components/loginPage/loginPage.vue";
 import RegistrationPage from "@/components/registrationPage/registrationPage.vue";
 
@@ -19,8 +19,8 @@ const routes = [
   },
   {
     path: '/sport',
-    name: 'MainComponent',
-    component: MainComponent
+    name: 'SportPage',
+    component: SportPage
   },
   {
     path: '/*',

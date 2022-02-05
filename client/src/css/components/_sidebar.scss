@@ -1,0 +1,58 @@
+.sidebar {
+    width: 300px;
+    padding: 10px;
+    background-color: $background;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    height: 100vh;
+
+    &__profile-block {
+        margin-top: 75px;
+        width: 100%;
+
+        &-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: auto;
+        }
+
+        &-name {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        &-email {
+            font-size: 10px;
+            color: $greyColor
+        }
+
+        &-function {
+            margin-top: 15px;
+            align-self: flex-start;
+            position: relative;
+            width: 100%;
+
+            &-line {
+                position: absolute;
+                top: -17px;
+                left: 10px;
+                width: 1px;
+                height: 95px !important;
+
+                &-user {
+                    height: 65px !important;
+                }
+            }
+        }
+    }
+
+    &__links {
+        margin-top: 60px;
+        width: 100%;
+
+        &-text {
+            font-weight: 500;
+        }
+    }
+}

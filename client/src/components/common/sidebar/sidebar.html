@@ -1,0 +1,42 @@
+<div class="sidebar d-flex flex-column align-center">
+    <img src="../../../assets/sidebar-icon.png" alt="icon">
+    <div class="sidebar__profile-block d-flex flex-column align-center justify-center">
+        <div class="d-flex align-center justify-center w-100">
+            <img v-if="!modifiedUser.photo" class="sidebar__profile-block-img" src="../../../assets/no-photo.jpg" alt="user-photo">
+            <img v-else class="sidebar__profile-block-img" :src="modifiedUser.photo" alt="user-photo">
+            <div class="d-flex flex-column ml-2 w-100">
+                <span class="sidebar__profile-block-name">{{modifiedUser.firstname}} {{modifiedUser.lastname}}</span>
+                <span class="sidebar__profile-block-email">{{modifiedUser.email}}</span>
+            </div>
+        </div>
+        <div class="sidebar__profile-block-function">
+            <hr class="sidebar__profile-block-function-line"
+                :class="{'sidebar__profile-block-function-line-user':modifiedUser.role === 'USER'}">
+            <ul>
+                <li v-for="link in $options.static.profileLinks"
+                    :key="`${link.name}_${link.route}`"
+                    class="d-flex align-center cursor-pointer mb-2"
+                    v-if="visibleLink(link.forAdmin)"
+                >
+                    <span class="mr-3" :class="`fa-${link.icon}`"></span>
+                    <span>{{link.name}}</span>
+                    <span v-if="link.icon === 'profile'"
+                          class="fa-exit ml-auto"
+                          @click.stop="replaceRouter()"
+                    ></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="sidebar__links">
+        <ul>
+            <li v-for="link in NAV_LINKS"
+                :key="`${link.name}_${link.route}`"
+                class="d-flex align-center cursor-pointer mb-3"
+            >
+                <span class="mr-3" :class="`fa-${link.icon}`"></span>
+                <span class="sidebar__links-text">{{link.name}}</span>
+            </li>
+        </ul>
+    </div>
+</div>

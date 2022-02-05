@@ -2,9 +2,12 @@
 $greenBorder: #628272;
 $greenFont: #83AAA9;
 $greenShadow: #94bda8;
+$background: #F7F7F9;
+$greyColor: #A0A0A0;
 
 //import
 @import './icons.scss',
 
+        'components/sidebar.scss',
         'components/template.scss',
         'components/loginPage.scss';
