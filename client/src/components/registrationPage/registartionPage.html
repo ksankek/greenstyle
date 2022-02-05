@@ -1,0 +1,78 @@
+<div class="login-page d-flex">
+    <img class="login-page__image" src="../../assets/login.png" alt="login-page-image">
+    <div class="login-page__login-form d-flex flex-column align-center justify-center">
+        <h1>Регистрация</h1>
+        <div class="login-page__login-form-field">
+            <p class="login-page__login-form-field-title">Логин</p>
+            <b-form-input
+                    class="login-page__login-form-field-input"
+                    :class="{'login-page__login-form-field-error':error.email,
+                            'login-page__login-form-field-error':error.emailValid}"
+                    placeholder="Почта для входа"
+                    type="text"
+                    v-model="formData.email"
+                    @blur="[isRequired('email'), isValidEmail()]"
+            >
+            </b-form-input>
+            <animation :duration="200" :name="'slide-down-fade'" :changeHeight="true">
+                <div class="error-wrapper d-flex align-center" v-if="error.emailValid">
+                    <span class="fa-error mr-1"></span>
+                    <span>Введённая почта не валидна</span>
+                </div>
+            </animation>
+            <animation :duration="200" :name="'slide-down-fade'" :changeHeight="true">
+                <div class="error-wrapper d-flex align-center" v-if="error.email">
+                    <span class="fa-error mr-1"></span>
+                    <span>Это поле обязательно для заполнения</span>
+                </div>
+            </animation>
+        </div>
+        <div class="login-page__login-form-field">
+            <p class="login-page__login-form-field-title">Пароль</p>
+            <b-form-input
+                    class="login-page__login-form-field-input"
+                    placeholder="Введите пароль"
+                    :class="{'login-page__login-form-field-error':error.password}"
+                    type="password"
+                    v-model="formData.password"
+                    @blur="isRequired('password')"
+            >
+            </b-form-input>
+            <animation :duration="200" :name="'slide-down-fade'" :changeHeight="true">
+                <div class="error-wrapper d-flex align-center" v-if="error.password">
+                    <span class="fa-error mr-1"></span>
+                    <span>Это поле обязательно для заполнения</span>
+                </div>
+            </animation>
+        </div>
+        <div class="login-page__login-form-field">
+            <p class="login-page__login-form-field-title">Подтвердите пароль</p>
+            <b-form-input
+                    class="login-page__login-form-field-input"
+                    placeholder="Подтвердите пароль"
+                    v-model="formData.confirmPassword"
+                    :class="{'login-page__login-form-field-error':error.confirmPassword}"
+                    type="password"
+                    @blur="isRequired('confirmPassword')"
+            >
+            </b-form-input>
+            <animation :duration="200" :name="'slide-down-fade'" :changeHeight="true">
+                <div class="error-wrapper d-flex align-center" v-if="error.confirmPassword">
+                    <span class="fa-error mr-1"></span>
+                    <span>Это поле обязательно для заполнения</span>
+                </div>
+            </animation>
+        </div>
+        <v-btn
+                class="login-form__button"
+                outlined
+                :disabled="disabledButton"
+                @click="reqRegistration"
+        >
+            Регестрация
+        </v-btn>
+        <span class="mt-5">Уже зарегестрированы?
+            <span @click="$router.replace({path: '/login'})" class="login-page__href" href="#">Войти</span>
+        </span>
+    </div>
+</div>
