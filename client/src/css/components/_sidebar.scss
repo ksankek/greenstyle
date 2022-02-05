@@ -1,9 +1,10 @@
 .sidebar {
-    width: 300px;
+    width: 370px;
     padding: 10px;
     background-color: $background;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     height: 100vh;
+    z-index: 2;
 
     &__profile-block {
         margin-top: 75px;
