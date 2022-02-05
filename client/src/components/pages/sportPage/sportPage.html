@@ -1,0 +1,18 @@
+<div class="page">
+    <h1>Спорт</h1>
+    <div class="page__articles d-flex flex-wrap mt-5">
+        <div v-for="article in articles" class="page__articles-item-wrapper">
+            <div class="page__articles-item" :key="`${article.id}_${article.name}`">
+                <div class="page__articles-item-shadow d-flex flex-column justify-end cursor-pointer">
+                    <div class="d-flex align-center">
+                        <span class="page__articles-item-title">{{ article.name }}</span>
+                        <span class="fa-mark-alt ml-auto cursor-pointer"></span>
+                    </div>
+                    <span class="page__articles-item-description mt-3">{{ article.description }}</span>
+                </div>
+                <img v-if="article.files" class="page__articles-item-img" :src="getPhoto(article.files[0])" alt="image-article">
+                <img v-else class="page__articles-item-img" src="../../../assets/no-photo.jpg" alt="image-article">
+            </div>
+        </div>
+    </div>
+</div>
