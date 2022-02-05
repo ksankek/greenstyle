@@ -1,0 +1,10 @@
+.search {
+    height: 75px;
+    width: 100%;
+    background: $background;
+    padding: 0 70px 0 70px;
+
+    &__field {
+        width: 440px;
+    }
+}

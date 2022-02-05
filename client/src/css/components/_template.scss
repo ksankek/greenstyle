@@ -13,6 +13,14 @@
         & span {
             letter-spacing: 1px;
         }
+
+        & ul li {
+            list-style: none;
+        }
+
+        & .content {
+            width: 100%;
+        }
     }
 }
 

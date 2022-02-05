@@ -4,7 +4,7 @@
             <div class="wrapper">
                 <Sidebar v-if="checkLoginPage()" />
                 <div class="content">
-                    <div class="search" v-if="checkLoginPage()"></div>
+                    <Search v-if="checkLoginPage()" />
                     <router-view />
                 </div>
             </div>
@@ -15,10 +15,11 @@
 <script>
 import {mapActions} from 'vuex'
 import Sidebar from "@/components/common/sidebar/sidebar.vue";
+import Search from "@/components/common/search/search.vue";
 
 export default {
     name: 'App',
-    components: {Sidebar},
+    components: {Sidebar, Search},
     data: () => ({
         //
     }),

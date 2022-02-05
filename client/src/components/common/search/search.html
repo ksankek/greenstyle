@@ -1,0 +1,14 @@
+<div class="search d-flex align-center">
+    <div class="search__field">
+        <v-text-field placeholder="Поиск" append-icon="mdi-magnify">
+        </v-text-field>
+    </div>
+    <ul class="d-flex align-center justify-space-around w-100">
+        <li v-for="link in NAV_LINKS"
+            :key="`${link.name}_${link.route}`"
+            class="cursor-pointer mr-2"
+        >
+            <span>{{link.name}}</span>
+        </li>
+    </ul>
+</div>
