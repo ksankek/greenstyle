@@ -56,11 +56,13 @@ export default {
 
         isRequired(validateItem) {
             this.error[validateItem] = !this.formData[validateItem]
+            return this.error[validateItem]
         },
 
         isValidEmail() {
             const mask = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/
             this.error.emailValid = !mask.test(this.formData.email);
+            return this.error.emailValid
         }
     }
 }
