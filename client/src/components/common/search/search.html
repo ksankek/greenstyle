@@ -3,7 +3,7 @@
         <v-text-field placeholder="Поиск" append-icon="mdi-magnify">
         </v-text-field>
     </div>
-    <ul class="d-flex align-center justify-space-around w-100">
+    <ul class="d-flex align-center justify-space-around w-100 search__links">
         <li v-for="link in NAV_LINKS"
             :key="`${link.name}_${link.route}`"
             @click="$router.replace({path:`${link.route}`})"

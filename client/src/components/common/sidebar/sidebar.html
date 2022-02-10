@@ -12,7 +12,7 @@
         <div class="sidebar__profile-block-function">
             <hr class="sidebar__profile-block-function-line"
                 :class="{'sidebar__profile-block-function-line-user':modifiedUser.role === 'USER'}">
-            <ul>
+            <ul class="sidebar__profile-block-function-links">
                 <li v-for="link in $options.static.profileLinks"
                     :key="`${link.name}_${link.route}`"
                     class="d-flex align-center cursor-pointer mb-2"
