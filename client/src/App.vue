@@ -33,8 +33,6 @@ export default {
         checkUserLogin() {
             if (localStorage.getItem('token')) {
                 this.setUser(localStorage.getItem('token'))
-                this.$router.replace({path:'/sport'}).catch(()=>{})
-                this.checkLoginPage()
             }
         },
 

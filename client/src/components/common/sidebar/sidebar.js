@@ -49,7 +49,7 @@ export default {
                 firstname: this.USER?.firstname,
                 lastname: this.USER?.lastname,
                 patronymic: this.USER?.patronymic,
-                photo: this.USER?.patronymic ? this.getUserPhoto : '',
+                photo: this.USER?.photo ? this.getUserPhoto : '',
                 email: this.USER?.email,
                 role: this.USER?.role
             }
