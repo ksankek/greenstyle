@@ -33,3 +33,12 @@
 .cursor-pointer {
     cursor: pointer;
 }
+
+.v-btn--outlined{
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+    height: 50px !important;
+    background: $greenBorder;
+    border: none;
+    color: white !important;
+}

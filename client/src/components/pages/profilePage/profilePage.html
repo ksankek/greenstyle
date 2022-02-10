@@ -1,0 +1,65 @@
+<div class="profile-page">
+    <h1>Профиль</h1>
+    <div class="d-flex">
+        <div class="profile-page__image-block d-flex flex-column">
+            <img v-if="!modifiedUser.photo"
+                 class="profile-page__image-block-img"
+                 src="../../../assets/no-photo.jpg"
+                 alt="user-photo">
+            <img v-else class="profile-page__image-block-img" :src="modifiedUser.photo" alt="user-photo">
+            <v-btn outlined>Загрузить фото</v-btn>
+            <v-btn text>Удалить</v-btn>
+        </div>
+        <div class="d-flex flex-column profile-page__settings">
+            <h3>Редактирование</h3>
+            <b-row>
+                <b-col cols="2">
+                    <span class="mr-3">Почта: </span>
+                </b-col>
+                <b-col cols="10" lg="6">
+                    <b-form-input placeholder="Введите почту" disabled v-model="modifiedUser.email"></b-form-input>
+                </b-col>
+                <div class="w-100"></div>
+                <b-col cols="2">
+                    <span class="mr-3">Имя: </span>
+                </b-col>
+                <b-col cols="10" lg="6">
+                    <b-form-input class="login-page__login-form-field-input"
+                                  placeholder="Введите имя"
+                                  v-model="modifiedUser.firstname"></b-form-input>
+                </b-col>
+                <div class="w-100"></div>
+                <b-col cols="2">
+                    <span class="mr-3">Фамилия: </span>
+                </b-col>
+                <b-col cols="10" lg="6">
+                    <b-form-input class="login-page__login-form-field-input"
+                                  placeholder="Введите фамилия"
+                                  v-model="modifiedUser.lastname"></b-form-input>
+                </b-col>
+                <div class="w-100"></div>
+                <b-col cols="2">
+                    <span class="mr-3">Отчество: </span>
+                </b-col>
+                <b-col cols="10" lg="6">
+                    <b-form-input class="login-page__login-form-field-input"
+                                  placeholder="Введите отчество"
+                                  v-model="modifiedUser.patronymic"></b-form-input>
+                </b-col>
+                <div class="w-100"></div>
+                <b-col cols="2">
+                    <span class="mr-3">Телефон: </span>
+                </b-col>
+                <b-col cols="10" lg="6">
+                    <b-form-input class="login-page__login-form-field-input"
+                                  placeholder="Введите телефон"
+                                  v-model="modifiedUser.phone"></b-form-input>
+                </b-col>
+            </b-row>
+            <div class="d-flex align-center profile-page__settings-buttons">
+                <v-btn outlined @click="reqSaveChanges">Сохранить изменения</v-btn>
+                <v-btn text @click="rollback">Отмена</v-btn>
+            </div>
+        </div>
+    </div>
+</div>
