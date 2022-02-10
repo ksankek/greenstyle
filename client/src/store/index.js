@@ -36,7 +36,7 @@ export default new Vuex.Store({
                 {
                     name: 'Вредные привычки',
                     icon: 'alcohol',
-                    route: '/sport'
+                    route: '/habits'
                 },
                 {
                     name: 'Видеогалерея',

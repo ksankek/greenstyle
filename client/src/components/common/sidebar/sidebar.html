@@ -1,6 +1,6 @@
 <div class="sidebar d-flex flex-column align-center">
     <img src="../../../assets/sidebar-icon.png" alt="icon">
-    <div class="sidebar__profile-block d-flex flex-column align-center justify-center">
+    <div class="sidebar__profile-block d-flex flex-column align-center justify-center" v-if="USER.id">
         <div class="d-flex align-center justify-center w-100">
             <img v-if="!modifiedUser.photo" class="sidebar__profile-block-img" src="../../../assets/no-photo.jpg" alt="user-photo">
             <img v-else class="sidebar__profile-block-img" :src="modifiedUser.photo" alt="user-photo">
@@ -17,6 +17,7 @@
                     :key="`${link.name}_${link.route}`"
                     class="d-flex align-center cursor-pointer mb-2"
                     v-if="visibleLink(link.forAdmin)"
+                    @click="$router.replace({path:`${link.route}`})"
                 >
                     <span class="mr-3" :class="`fa-${link.icon}`"></span>
                     <span>{{link.name}}</span>
@@ -32,6 +33,7 @@
         <ul>
             <li v-for="link in NAV_LINKS"
                 :key="`${link.name}_${link.route}`"
+                @click="$router.replace({path:`${link.route}`})"
                 class="d-flex align-center cursor-pointer mb-3"
             >
                 <span class="mr-3" :class="`fa-${link.icon}`"></span>

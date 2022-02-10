@@ -1,0 +1,36 @@
+.profile-page {
+    padding: 50px;
+
+    &__image-block {
+        padding: 20px;
+        background: $background;
+        border-radius: 5px;
+        height: fit-content;
+
+        &-img {
+            width: 250px;
+            height: 250px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    }
+
+    &__settings {
+        margin-left: 25px;
+        padding: 20px;
+        background: $background;
+        width: 100%;
+
+        &-field {
+            width: 50%;
+        }
+
+        &-buttons {
+            margin-top: 50px;
+        }
+
+        .v-btn--outlined {
+            width: 300px;
+        }
+    }
+}

@@ -6,6 +6,7 @@
     <ul class="d-flex align-center justify-space-around w-100">
         <li v-for="link in NAV_LINKS"
             :key="`${link.name}_${link.route}`"
+            @click="$router.replace({path:`${link.route}`})"
             class="cursor-pointer mr-2"
         >
             <span>{{link.name}}</span>
