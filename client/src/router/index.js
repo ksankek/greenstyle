@@ -6,6 +6,7 @@ import HabitsPage from "@/components/templatePages/habitsPage.vue";
 import LoginPage from "@/components/loginPage/loginPage.vue";
 import RegistrationPage from "@/components/registrationPage/registrationPage.vue";
 import ProfilePage from "@/components/templatePages/profilePage.vue";
+import VideoPage from "@/components/templatePages/videoPage.vue";
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,11 @@ const routes = [
     path: '/habits',
     name: 'HabitsPage',
     component: HabitsPage
+  },
+  {
+    path: '/video',
+    name: 'Video',
+    component: VideoPage
   },
   {
     path: '/profile',
