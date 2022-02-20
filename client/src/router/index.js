@@ -7,6 +7,7 @@ import LoginPage from "@/components/loginPage/loginPage.vue";
 import RegistrationPage from "@/components/registrationPage/registrationPage.vue";
 import ProfilePage from "@/components/templatePages/profilePage.vue";
 import VideoPage from "@/components/templatePages/videoPage.vue";
+import ViewPage from "@/components/viewPage/viewPage.vue";
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,18 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: ProfilePage
+  },
+  {
+    path: '/sport/:id',
+    name: 'SportArticle',
+    component: ViewPage,
+    props: true
+  },
+  {
+    path: '/food/:id',
+    name: 'FoodArticle',
+    component: ViewPage,
+    props: true
   },
   {
     path: '*',

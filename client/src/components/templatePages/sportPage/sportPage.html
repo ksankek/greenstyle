@@ -2,7 +2,9 @@
     <h1>Спорт</h1>
     <div class="page__articles d-flex flex-wrap mt-5">
         <div v-for="article in articles" class="page__articles-item-wrapper">
-            <div class="page__articles-item" :key="`${article.id}_${article.name}`">
+            <div class="page__articles-item"
+                 :key="`${article.id}_${article.name}`"
+                 @click="$router.push({name: 'SportArticle', params: {id:article.id}})">
                 <div class="page__articles-item-shadow d-flex flex-column justify-end cursor-pointer">
                     <div class="d-flex align-center">
                         <span class="page__articles-item-title">{{ article.name }}</span>
