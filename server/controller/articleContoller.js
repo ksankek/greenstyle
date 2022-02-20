@@ -128,7 +128,7 @@ class ArticleController{
         Article.update({
                 name: `${name}`,
                 description: `${description}`,
-                sectionIdId: `${sectionId}`
+                sectionId: `${sectionId}`
             },
             { where: {id}})
             .then(() => {
