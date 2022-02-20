@@ -1,4 +1,11 @@
-<div class="page">
-    <h1>{{article.name}}</h1>
-    <p>{{article.description}}</p>
+<div class="page view">
+    <h1>{{modifiedArticle.name}}</h1>
+    <div v-if="modifiedArticle.files && modifiedArticle.files.length" class="view__carousel">
+        <carousel :per-page="1" autoplay autoplayHoverPause>
+            <slide v-for="image in modifiedArticle.files" :key="`${image}`">
+                <img class="view__carousel-image" :src="`http://localhost:5000/${image}`" alt="carousel-image">
+            </slide>
+        </carousel>
+    </div>
+    <p>{{modifiedArticle.description}}</p>
 </div>

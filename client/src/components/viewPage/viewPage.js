@@ -1,6 +1,8 @@
+import { Carousel, Slide } from 'vue-carousel';
+
 export default {
     name: 'ViewPage',
-    components: {},
+    components: {Carousel, Slide},
     props: {
         id: {
             type: [String, Number],
@@ -20,6 +22,13 @@ export default {
     watch: {
     },
     computed: {
+        modifiedArticle() {
+            return {
+                name: this.article.name,
+                files: this.article.files,
+                description: this.article.description
+            }
+        }
     },
     methods: {
         reqGetArticle() {
