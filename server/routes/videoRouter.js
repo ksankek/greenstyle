@@ -4,7 +4,7 @@ const videoController = require("../controller/videoController");
 const checkRole = require("../middleware/checkRoleMiddleware");
 
 router.post("/", checkRole('ADMIN'), videoController.addVideo);
-router.get("/:sectionId", videoController.getAll);
+router.get("/", videoController.getAll);
 router.delete("/:videoId", checkRole('ADMIN'), videoController.delete);
 
 module.exports = router;
