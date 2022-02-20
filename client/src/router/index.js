@@ -8,6 +8,7 @@ import RegistrationPage from "@/components/registrationPage/registrationPage.vue
 import ProfilePage from "@/components/templatePages/profilePage.vue";
 import VideoPage from "@/components/templatePages/videoPage.vue";
 import ViewPage from "@/components/viewPage/viewPage.vue";
+import AdminPage from "@/components/adminPage/adminPage.vue";
 
 Vue.use(VueRouter)
 
@@ -58,6 +59,11 @@ const routes = [
     name: 'FoodArticle',
     component: ViewPage,
     props: true
+  },
+  {
+    path: '/admin',
+    name: 'AdminPage',
+    component: AdminPage
   },
   {
     path: '*',
