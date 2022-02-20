@@ -24,7 +24,7 @@ export default {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                url: `http://localhost:5000/api/article`
+                url: `http://localhost:5000/api/article/all/2`
             }).then(res => {
                 if (res.status === 200) {
                     this.articles = res.data
