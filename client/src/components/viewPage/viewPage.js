@@ -11,7 +11,8 @@ export default {
     },
     data() {
         return {
-            article: {}
+            article: {},
+            content: ''
         }
     },
     created() {
