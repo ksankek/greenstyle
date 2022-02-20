@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import SportPage from "@/components/pages/sportPage.vue";
-import FoodPage from "@/components/pages/foodPage.vue";
-import HabitsPage from "@/components/pages/habitsPage.vue";
+import SportPage from "@/components/templatePages/sportPage.vue";
+import FoodPage from "@/components/templatePages/foodPage.vue";
+import HabitsPage from "@/components/templatePages/habitsPage.vue";
 import LoginPage from "@/components/loginPage/loginPage.vue";
 import RegistrationPage from "@/components/registrationPage/registrationPage.vue";
-import ProfilePage from "@/components/pages/profilePage.vue";
+import ProfilePage from "@/components/templatePages/profilePage.vue";
 
 Vue.use(VueRouter)
 
