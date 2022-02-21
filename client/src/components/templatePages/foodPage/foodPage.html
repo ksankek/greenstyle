@@ -8,7 +8,9 @@
                 <div class="page__articles-item-shadow d-flex flex-column justify-end cursor-pointer">
                     <div class="d-flex align-center">
                         <span class="page__articles-item-title">{{ article.name }}</span>
-                        <span class="fa-mark-alt ml-auto cursor-pointer"></span>
+                        <span class="ml-auto cursor-pointer"
+                              :class="test[article.id] ? 'fa-mark-alt' : 'fa-close'"
+                              @click.stop="reqAddToFavourite(article.id)"></span>
                     </div>
                 </div>
                 <img v-if="article.files" class="page__articles-item-img" :src="getPhoto(article.files[0])" alt="image-article">

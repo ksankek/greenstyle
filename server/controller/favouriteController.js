@@ -14,6 +14,23 @@ class FavouriteController{
         }
     }
 
+    async checkOnAdd(req, res, next) {
+        try {
+            let {favouriteId, articleId} = req.params;
+
+            const favourite = await Favourite_article.findOne({where: {favouriteId, articleId}});
+
+            if (favourite) {
+                return res.status(200).json({added: true});
+            } else {
+                return res.status(200).json({added: false});
+            }
+
+        } catch (e) {
+            next(ApiError.badRequest(e.message));
+        }
+    }
+
     async getAll(req, res, next) {
         let favouriteId = req.params.favouriteId;
         let favourite;
@@ -26,7 +43,7 @@ class FavouriteController{
         }
     }
 
-    async delete(req, res, next) {
+    async delete(req, res) {
         const id = req.params.id;
 
         Favourite_article.destroy({
@@ -36,7 +53,7 @@ class FavouriteController{
             res.status(200).json({msg:"Статья убрана из закладок"});
         })
         .catch(err => {
-            res.status(500).json({msg:"Ошибка"});
+            res.status(500).json({msg:err});
         })
     }
 
