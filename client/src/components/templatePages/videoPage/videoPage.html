@@ -1,0 +1,16 @@
+<div class="page">
+    <h1>Видеогалерея</h1>
+    <div class="page__articles d-flex flex-wrap mt-5">
+        <div v-for="video in videos" class="page__articles-item-wrapper">
+            <iframe width="300"
+                    height="200"
+                    :key="`${video.id}_${video.url}`"
+                    :src="`${video.url}`"
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+    <h1 class="mt-5" v-if="!videos.length">Нет статей в этом разделе :(</h1>
+</div>

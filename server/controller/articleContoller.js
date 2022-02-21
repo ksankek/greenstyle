@@ -32,7 +32,7 @@ class ArticleController{
                 res.status(200).json({msg:"Фото добавлено"});
             })
             .catch(err => {
-                res.status(500).json({msg:"Ошибка"});
+                res.status(500).json({msg:err});
             });
 
             return res.json(article);
@@ -45,7 +45,7 @@ class ArticleController{
         try {
             const id = req.params.articleId;
             const {comment, userId, date} = req.body;
-            const article = await Article.update({
+            await Article.update({
                     comments: Sequelize.fn('array_append', Sequelize.col('comments'),
                         JSON.stringify({comment, userId, date}))
                 }, {where: {id:id}}
@@ -70,14 +70,14 @@ class ArticleController{
                 return file !== fileName
             })
 
-            article = await Article.update({
+            await Article.update({
                     files: files
                 }, {where: {id:articleId}}
             ).then(() => {
                 return res.status(200).json({msg:"Фото удалено"});
             })
             .catch(err => {
-                return res.status(500).json({msg:"Ошибка"});
+                return res.status(500).json({msg:err});
             });
 
         } catch (e) {
@@ -97,6 +97,18 @@ class ArticleController{
         }
     }
 
+    async getAllById(req, res, next) {
+        let sectionId = req.params.sectionId;
+
+        try{
+            const article = await Article.findAll({where: {sectionId:sectionId}})
+
+            return res.json(article);
+        } catch (e) {
+            next(ApiError.badRequest(e.message));
+        }
+    }
+
     async getArticleById(req, res, next){
         let articleId = req.params.articleId;
 
@@ -109,25 +121,25 @@ class ArticleController{
         }
     }
 
-    async edit(req, res, next){
+    async edit(req, res){
         const id = req.params.articleId;
         const {name, description, sectionId} = req.body;
 
         Article.update({
                 name: `${name}`,
                 description: `${description}`,
-                sectionIdId: `${sectionId}`
+                sectionId: `${sectionId}`
             },
             { where: {id}})
             .then(() => {
                 res.status(200).json({msg:"Статья обновлена"});
             })
             .catch(err => {
-                res.status(500).json({msg:"Ошибка"});
+                res.status(500).json({msg:err});
             })
     }
 
-    async delete(req, res, next){
+    async delete(req, res){
         const id = req.params.articleId;
 
         Article.destroy({
@@ -137,7 +149,7 @@ class ArticleController{
                 res.status(200).json({msg:"Статья удалена"});
             })
             .catch(err => {
-                res.status(500).json({msg:"Ошибка"});
+                res.status(500).json({msg:err});
             })
     }
 

@@ -1,33 +1,33 @@
 export default {
-    name: 'FoodPage',
+    name: 'VideoPage',
     components: {},
     props: {
     },
     data() {
         return {
-            articles: []
+            videos: []
         }
     },
     created() {
     },
     mounted() {
-        this.reqGetAllArticles()
+        this.reqGetAllVideos()
     },
     watch: {
     },
     computed: {
     },
     methods: {
-        reqGetAllArticles() {
+        reqGetAllVideos() {
             this.$http({
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                url: `http://localhost:5000/api/article`
+                url: `http://localhost:5000/api/video`
             }).then(res => {
                 if (res.status === 200) {
-                    this.articles = res.data
+                    this.videos = res.data
                 }
             })
         },

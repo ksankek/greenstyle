@@ -5,7 +5,8 @@ const authMiddleware = require("../middleware/authMiddleware");
 const checkRole= require("../middleware/checkRoleMiddleware");
 
 router.post("/", checkRole("ADMIN"), articleController.create);
-router.get("/", articleController.getAll);
+router.get("/all", articleController.getAll);
+router.get("/all/:sectionId", articleController.getAllById);
 router.get("/:articleId", articleController.getArticleById)
 router.put("/:articleId", checkRole("ADMIN"), articleController.edit);
 router.put("/photo/:articleId", checkRole("ADMIN"), articleController.addPhoto)

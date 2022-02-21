@@ -8,11 +8,11 @@
                         <span class="page__articles-item-title">{{ article.name }}</span>
                         <span class="fa-mark-alt ml-auto cursor-pointer"></span>
                     </div>
-                    <span class="page__articles-item-description mt-3">{{ article.description }}</span>
                 </div>
                 <img v-if="article.files" class="page__articles-item-img" :src="getPhoto(article.files[0])" alt="image-article">
                 <img v-else class="page__articles-item-img" src="../../../assets/no-photo.jpg" alt="image-article">
             </div>
         </div>
+        <h1 class="mt-5" v-if="!articles.length">Нет статей в этом разделе :(</h1>
     </div>
 </div>

@@ -17,7 +17,7 @@
                     :key="`${link.name}_${link.route}`"
                     class="d-flex align-center cursor-pointer mb-2"
                     v-if="visibleLink(link.forAdmin)"
-                    @click="$router.replace({path:`${link.route}`})"
+                    @click="$router.replace({path:`${link.route}`}).catch(() => {})"
                 >
                     <span class="mr-3" :class="`fa-${link.icon}`"></span>
                     <span>{{link.name}}</span>
@@ -33,7 +33,7 @@
         <ul>
             <li v-for="link in NAV_LINKS"
                 :key="`${link.name}_${link.route}`"
-                @click="$router.replace({path:`${link.route}`})"
+                @click="$router.replace({path:`${link.route}`}).catch(() => {})"
                 class="d-flex align-center cursor-pointer mb-3"
             >
                 <span class="mr-3" :class="`fa-${link.icon}`"></span>

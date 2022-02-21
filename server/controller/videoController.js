@@ -15,10 +15,8 @@ class VideoController{
     }
 
     async getAll(req, res, next) {
-        let sectionId = req.params.sectionId;
-
         try{
-            const video = await Video.findAll({where: {sectionId}})
+            const video = await Video.findAll()
             return res.json(video);
         } catch (e) {
             next(ApiError.badRequest(e.message));
@@ -35,7 +33,7 @@ class VideoController{
             res.status(200).json({msg:"Видео удалено"});
         })
         .catch(err => {
-            res.status(500).json({msg:"Ошибка"});
+            res.status(500).json({msg:err});
         })
     }
 
