@@ -97,6 +97,7 @@ export default {
                 if (res.status === 200) {
                     console.log(res.data)
                     this.setUser(localStorage.getItem('token'))
+                    this.dialog = false
                 }
             })
         }

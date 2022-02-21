@@ -66,7 +66,7 @@ export default {
         },
         replaceRouter() {
             localStorage.removeItem('token')
-            this.$router.replace({path:'login'})
+            this.$router.replace({name:'LoginPage'})
         }
     }
 }
