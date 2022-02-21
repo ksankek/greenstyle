@@ -7,5 +7,32 @@
             </slide>
         </carousel>
     </div>
-    <div class="ql-editor" v-html="article.description"></div>
+    <div class="ql-editor" v-html="modifiedArticle.description"></div>
+    <div>
+        <div class="d-flex flex-column">
+            <p class="view__comments-title">Комментарии</p>
+            <div class="view__comments-text-area d-flex justify-end">
+                <v-textarea rows="4" v-model="commentObj.comment"></v-textarea>
+                <v-btn class="mt-auto ml-5" outlined @click="reqSendComment">Отправить</v-btn>
+            </div>
+        </div>
+        <div class="view__comments-messages" v-if="modifiedArticle.comments && modifiedArticle.comments.length">
+            <div class="view__comments-comment d-flex mt-3"
+                 v-for="comment in modifiedArticle.comments"
+                 :key="`${comment.date}_${comment.userId}`">
+                <img v-if="!getCommentUser(comment.userId, 'photo')"
+                     class="view__comments-img"
+                     src="../../assets/no-photo.jpg"
+                     alt="user-photo">
+                <img v-else class="view__comments-img" :src="modifiedUserPhoto(getCommentUser(comment.userId, 'photo'))" alt="user-photo">
+                <div class="d-flex flex-column ml-3">
+                    <div class="d-flex align-center">
+                        <span class="view__comments-name"> {{ getCommentUser(comment.userId, 'fullName') }} </span>
+                        <span class="view__comments-date ml-5"> {{ modifiedDate(comment.date) }} </span>
+                    </div>
+                    <p> {{ comment.comment }} </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
