@@ -3,32 +3,31 @@
 
     &__articles {
 
+        &-img-wrapper {
+            height: 78%;
+            border-bottom: 1px solid $greyBorder;
+        }
+
         &-item {
             width: 300px;
-            height: 200px;
-            margin-bottom: 30px;
+            height: 250px;
             border-radius: 5px;
-            border: 1px solid black;
+            border: 1px solid $greyBorder;
             position: relative;
 
             &-wrapper {
                 padding: 35px;
             }
 
-            &-shadow {
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                box-shadow: inset 0px -60px 6px -10px rgba(0, 0, 0, 0.45);
-                color: white;
-                padding: 10px;
-            }
-
             &-img {
                 width: 100%;
                 height: 100%;
-                border-radius: 5px;
+                border-radius: 5px 5px 0 0;
                 z-index: -1;
+            }
+
+            &-title-wrapper {
+                padding: 10px;
             }
 
             &-title {

@@ -2,19 +2,20 @@
     <h1>Правильное питание</h1>
     <div class="page__articles d-flex flex-wrap mt-5">
         <div v-for="article in articles" class="page__articles-item-wrapper">
-            <div class="page__articles-item"
+            <div class="page__articles-item cursor-pointer"
                  :key="`${article.id}_${article.name}`"
                  @click="$router.push({name: 'FoodArticle', params: {id:article.id}})">
-                <div class="page__articles-item-shadow d-flex flex-column justify-end cursor-pointer">
-                    <div class="d-flex align-center">
-                        <span class="page__articles-item-title">{{ article.name }}</span>
-                        <span class="ml-auto cursor-pointer"
-                              :class="test[article.id] ? 'fa-mark-alt' : 'fa-close'"
-                              @click.stop="reqAddToFavourite(article.id)"></span>
-                    </div>
+                <div class="page__articles-img-wrapper">
+                    <img v-if="article.files" class="page__articles-item-img" :src="getPhoto(article.files[0])" alt="image-article">
+                    <img v-else class="page__articles-item-img" src="../../../assets/no-photo.jpg" alt="image-article">
                 </div>
-                <img v-if="article.files" class="page__articles-item-img" :src="getPhoto(article.files[0])" alt="image-article">
-                <img v-else class="page__articles-item-img" src="../../../assets/no-photo.jpg" alt="image-article">
+                <div class="page__articles-item-title-wrapper d-flex align-center cursor-pointer mt-1">
+                    <span class="page__articles-item-title">{{ article.name }}</span>
+                    <span class="ml-auto cursor-pointer"
+                          :class="{'fa-mark-active':article.inFavourite, 'fa-mark':!article.inFavourite}"
+                          @click.stop="reqAddToFavourite(article.id)">
+                    </span>
+                </div>
             </div>
         </div>
         <h1 class="mt-5" v-if="!articles.length">Нет статей в этом разделе :(</h1>
