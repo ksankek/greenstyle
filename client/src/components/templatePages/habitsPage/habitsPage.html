@@ -13,7 +13,7 @@
                     <span class="page__articles-item-title">{{ article.name }}</span>
                     <span class="ml-auto cursor-pointer"
                           :class="{'fa-mark-active':article.inFavourite, 'fa-mark':!article.inFavourite}"
-                          @click.stop="reqAddToFavourite(article.id)">
+                          @click.stop="addFavourite(article)">
                     </span>
                 </div>
             </div>

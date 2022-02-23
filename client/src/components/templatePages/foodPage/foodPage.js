@@ -83,9 +83,40 @@ export default {
                 })
             }).then(res => {
                 if (res.status === 200) {
-                    console.log(res.data)
+                    this.reqGetFavourite().then(res => {
+                        console.log(res)
+                        this.reqGetAllArticles()
+                    })
                 }
             })
+        },
+
+        reqDeleteFromFavourite(idArticle) {
+            const {id} = this.inFavourite.find(({articleId}) => idArticle === articleId)
+
+            this.$http({
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.token}`
+                },
+                url: `http://localhost:5000/api/favourite/${id}`
+            }).then(res => {
+                if (res.status === 200) {
+                    this.reqGetFavourite().then(res => {
+                        console.log(res)
+                        this.reqGetAllArticles()
+                    })
+                }
+            })
+        },
+
+        addFavourite(article) {
+            if (article.inFavourite) {
+                this.reqDeleteFromFavourite(article.id)
+            } else {
+                this.reqAddToFavourite(article.id)
+            }
         }
     }
 }
