@@ -9,6 +9,7 @@ import ProfilePage from "@/components/templatePages/profilePage.vue";
 import VideoPage from "@/components/templatePages/videoPage.vue";
 import ViewPage from "@/components/viewPage/viewPage.vue";
 import AdminPage from "@/components/adminPage/adminPage.vue";
+import FavouritePage from "@/components/templatePages/favouritePage.vue";
 
 Vue.use(VueRouter)
 
@@ -64,6 +65,11 @@ const routes = [
     path: '/admin',
     name: 'AdminPage',
     component: AdminPage
+  },
+  {
+    path: '/favourite',
+    name: 'FavouritePage',
+    component: FavouritePage
   },
   {
     path: '*',

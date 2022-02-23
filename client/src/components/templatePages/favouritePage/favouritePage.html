@@ -1,5 +1,5 @@
 <div class="page">
-    <h1>Вредные привычки</h1>
+    <h1>Избранное</h1>
     <div class="page__articles d-flex flex-wrap mt-5">
         <div v-for="article in articles" class="page__articles-item-wrapper">
             <div class="page__articles-item cursor-pointer"
@@ -11,13 +11,12 @@
                 </div>
                 <div class="page__articles-item-title-wrapper d-flex align-center cursor-pointer mt-1">
                     <span class="page__articles-item-title">{{ article.name }}</span>
-                    <span class="ml-auto cursor-pointer"
-                          :class="{'fa-mark-active':article.inFavourite, 'fa-mark':!article.inFavourite}"
-                          @click.stop="addFavourite(article)">
+                    <span class="ml-auto cursor-pointer fa-mark-active"
+                          @click.stop="reqDeleteFromFavourite(article.id)">
                     </span>
                 </div>
             </div>
         </div>
-        <h1 class="mt-5" v-if="!articles.length">Нет статей в этом разделе :(</h1>
+        <h1 class="mt-5" v-if="!articles.length">Нет статей в избранном :(</h1>
     </div>
 </div>
