@@ -6,6 +6,7 @@
 
     &__field {
         width: 440px;
+        position: relative;
     }
 
     &__links {
@@ -17,5 +18,14 @@
                 color: $greenHover
             }
         }
+    }
+
+    &__result {
+        position: absolute;
+        width: 100%;
+        height: 320px;
+        overflow: auto;
+        z-index: 1000;
+        background-color: $background;
     }
 }

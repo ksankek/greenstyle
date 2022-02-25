@@ -1,7 +1,27 @@
 <div class="search d-flex align-center">
     <div class="search__field">
-        <v-text-field placeholder="Поиск" append-icon="mdi-magnify">
+        <v-text-field placeholder="Поиск"
+                      append-icon="mdi-magnify"
+                      v-model="search"
+                      @click="getSearchArticles"
+                      @change="getSearchArticles">
         </v-text-field>
+        <div class="search__result" v-if="searchArticles.length">
+            <v-list color="#F7F7F9">
+                <v-list-item-group>
+                    <v-list-item three-line v-for="article in searchArticles" :key="`${article.id}_${article.name}`">
+                        <v-list-item-avatar>
+                            <img v-if="article.files" :src="getPhoto(article.files[0])" alt="article-photo">
+                            <img v-else src="../../../assets/no-photo.jpg" alt="article-photo">
+                        </v-list-item-avatar>
+                        <v-list-item-content>
+                            <v-list-item-title>{{article.name}}</v-list-item-title>
+                            <v-list-item-subtitle>{{sections[article.sectionId]}}</v-list-item-subtitle>
+                        </v-list-item-content>
+                    </v-list-item>
+                </v-list-item-group>
+            </v-list>
+        </div>
     </div>
     <ul class="d-flex align-center justify-space-around w-100 search__links">
         <li v-for="link in NAV_LINKS"
