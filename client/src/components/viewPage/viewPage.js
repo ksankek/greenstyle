@@ -35,7 +35,7 @@ export default {
                 name: this.article.name,
                 files: this.article.files,
                 description: this.article.description,
-                comments: this.article.comments
+                comments: this.article.comments?.reverse()
             }
         }
     },
