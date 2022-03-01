@@ -3,7 +3,8 @@ import {mapGetters} from "vuex"
 export default {
     name: 'TemplatePages',
     props: {
-      idSection: Number
+        idSection: Number,
+        nameSection: String
     },
     components: {},
     data() {
