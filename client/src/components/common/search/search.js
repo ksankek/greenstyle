@@ -14,6 +14,14 @@ export default {
         }
     },
     created() {
+        this.$options.static = {
+            routerNames: {
+                1: 'SportArticle',
+                2: 'FoodArticle',
+                3: 'HabitsArticle'
+            }
+        }
+
         this.reqGetSections()
         this.reqGetAllArticles()
     },
@@ -62,6 +70,12 @@ export default {
                         this.sections[item.id] = item.name
                     })
                 }
+            })
+        },
+        test(id, sectionId) {
+            this.$router.replace({
+                name: this.$options.static.routerNames[sectionId],
+                params: {id: id}
             })
         }
     }
