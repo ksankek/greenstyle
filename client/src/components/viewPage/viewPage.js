@@ -40,13 +40,13 @@ export default {
         }
     },
     methods: {
-        reqGetArticle() {
+        reqGetArticle(id = this.id) {
             this.$http({
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                url: `http://localhost:5000/api/article/${this.id}`
+                url: `http://localhost:5000/api/article/${id}`
             }).then(res => {
                 if (res.status === 200) {
                     this.article = res.data
@@ -115,5 +115,15 @@ export default {
         modifiedUserPhoto(photo) {
             return `http://localhost:5000/${photo}`
         }
+    },
+    beforeRouteLeave(to, from, next) {
+        console.log(from, to)
+        this.reqGetArticle(to.params.id)
+        next()
+    },
+    beforeRouteUpdate(to, from, next) {
+        console.log(from, to)
+        this.reqGetArticle(to.params.id)
+        next()
     }
 }

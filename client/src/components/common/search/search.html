@@ -9,7 +9,11 @@
         <div class="search__result" v-if="searchArticles.length">
             <v-list color="#F7F7F9">
                 <v-list-item-group>
-                    <v-list-item three-line v-for="article in searchArticles" :key="`${article.id}_${article.name}`">
+                    <v-list-item three-line
+                                 v-for="article in searchArticles"
+                                 :key="`${article.id}_${article.name}`"
+                                 @click="test(article.id, article.sectionId)"
+                    >
                         <v-list-item-avatar>
                             <img v-if="article.files" :src="getPhoto(article.files[0])" alt="article-photo">
                             <img v-else src="../../../assets/no-photo.jpg" alt="article-photo">
