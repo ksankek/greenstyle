@@ -1,10 +1,9 @@
 import {mapGetters} from "vuex";
+import {toastMixin} from "@/mixins/toastMixin";
 
 export default {
     name: 'FavouritePage',
-    components: {},
-    props: {
-    },
+    mixins: [toastMixin],
     data() {
         return {
             inFavourite: [],
@@ -15,8 +14,6 @@ export default {
         if (this.USER.id) {
             this.reqGetFavourite()
         }
-    },
-    mounted() {
     },
     watch: {
         USER: function () {
@@ -76,6 +73,7 @@ export default {
             }).then(res => {
                 if (res.status === 200) {
                     this.reqGetFavourite()
+                    this.setToastSuccess(res.data.msg)
                 }
             })
         },
