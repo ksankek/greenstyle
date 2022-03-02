@@ -60,4 +60,11 @@
             </span>
         </span>
     </div>
+    <b-toast
+            id="successLogin"
+            toaster="b-toaster-top-full custom-toast"
+            :variant="toastInfo.isSuccess ? 'success' : 'error'"
+            auto-hide-delay="2500">
+        <template v-slot:toast-title>{{toastInfo.message}}</template>
+    </b-toast>
 </div>

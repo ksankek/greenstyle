@@ -1,10 +1,9 @@
 import {mapActions} from 'vuex'
+import {toastMixin} from "@/mixins/toastMixin";
 
 export default {
     name: 'RegistrationPage',
-    components: {},
-    props: {
-    },
+    mixins: [toastMixin],
     data() {
         return {
             formData: {
@@ -20,12 +19,6 @@ export default {
                 confirmPassword: false
             }
         }
-    },
-    created() {
-    },
-    mounted() {
-    },
-    watch: {
     },
     computed: {
         disabledButton() {
@@ -51,6 +44,8 @@ export default {
                     this.setUser(res.data.token)
                     this.$router.push({path:'/sport'})
                 }
+            }).catch(err => {
+                this.setToastError(err.response.data.message)
             })
         },
 

@@ -1,10 +1,9 @@
 import {mapActions} from 'vuex'
+import {toastMixin} from "@/mixins/toastMixin";
 
 export default {
     name: 'LoginPage',
-    components: {},
-    props: {
-    },
+    mixins: [toastMixin],
     data() {
         return {
             loginForm: {
@@ -17,12 +16,6 @@ export default {
                 password: false
             }
         }
-    },
-    created() {
-    },
-    mounted() {
-    },
-    watch: {
     },
     computed: {
         disabledButton() {
@@ -47,9 +40,6 @@ export default {
                     this.setUser(res.data.token)
                     this.$router.push({path:'/sport'})
                 }
-            }).catch(err => {
-                localStorage.removeItem('token')
-                console.log(err.response.data.message)
             })
         },
 

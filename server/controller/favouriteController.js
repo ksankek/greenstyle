@@ -7,7 +7,7 @@ class FavouriteController{
         try {
             let {favouriteId, articleId} = req.body;
 
-            const favourite = await Favourite_article.create({favouriteId, articleId});
+            await Favourite_article.create({favouriteId, articleId});
             return res.status(200).json({msg:"Статья добавлена в закладки"});
         } catch (e) {
             next(ApiError.badRequest(e.message));
@@ -50,7 +50,7 @@ class FavouriteController{
             where: {id}
         })
         .then(() => {
-            res.status(200).json({msg:"Статья убрана из закладок"});
+            res.status(200).json({msg:"Статья удалена из закладок"});
         })
         .catch(err => {
             res.status(500).json({msg:err});

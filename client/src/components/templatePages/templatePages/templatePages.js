@@ -1,4 +1,5 @@
 import {mapGetters} from "vuex"
+import {toastMixin} from "@/mixins/toastMixin";
 
 export default {
     name: 'TemplatePages',
@@ -6,7 +7,7 @@ export default {
         idSection: Number,
         nameSection: String
     },
-    components: {},
+    mixins: [toastMixin],
     data() {
         return {
             articles: [],
@@ -20,8 +21,6 @@ export default {
                 this.reqGetAllArticles()
             })
         }
-    },
-    mounted() {
     },
     watch: {
         USER: function () {
@@ -89,6 +88,7 @@ export default {
                         console.log(res)
                         this.reqGetAllArticles()
                     })
+                    this.setToastSuccess(res.data.msg)
                 }
             })
         },
@@ -109,6 +109,7 @@ export default {
                         console.log(res)
                         this.reqGetAllArticles()
                     })
+                    this.setToastSuccess(res.data.msg)
                 }
             })
         },

@@ -1,10 +1,9 @@
 import {mapActions, mapGetters} from "vuex";
+import {toastMixin} from "@/mixins/toastMixin";
 
 export default {
     name: 'ProfilePage',
-    components: {},
-    props: {
-    },
+    mixins: [toastMixin],
     data() {
         return {
             user: {
@@ -13,12 +12,6 @@ export default {
             dialog: false,
             imageFile: null
         }
-    },
-    created() {
-    },
-    mounted() {
-    },
-    watch: {
     },
     computed: {
         ...mapGetters(['USER']),
@@ -52,8 +45,8 @@ export default {
                 data: JSON.stringify(this.user)
             }).then(res => {
                 if (res.status === 200) {
-                    console.log(res.data)
                     this.setUser(localStorage.getItem('token'))
+                    this.setToastSuccess(res.data.msg)
                 }
             })
         },
@@ -78,6 +71,7 @@ export default {
             }).then(res => {
                 if (res.status === 200) {
                     this.setUser(localStorage.getItem('token'))
+                    this.setToastSuccess(res.data.msg)
                 }
             })
         },
@@ -98,6 +92,7 @@ export default {
                     console.log(res.data)
                     this.setUser(localStorage.getItem('token'))
                     this.dialog = false
+                    this.setToastSuccess(res.data.msg)
                 }
             })
         }
