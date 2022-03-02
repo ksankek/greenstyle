@@ -3,6 +3,7 @@
         <v-text-field placeholder="Поиск"
                       append-icon="mdi-magnify"
                       v-model="search"
+                      class="search__field-input"
                       @click="getSearchArticles"
                       @change="getSearchArticles">
         </v-text-field>
@@ -12,7 +13,7 @@
                     <v-list-item three-line
                                  v-for="article in searchArticles"
                                  :key="`${article.id}_${article.name}`"
-                                 @click="test(article.id, article.sectionId)"
+                                 @click="routeToArticle(article.id, article.sectionId)"
                     >
                         <v-list-item-avatar>
                             <img v-if="article.files" :src="getPhoto(article.files[0])" alt="article-photo">

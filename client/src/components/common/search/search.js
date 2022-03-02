@@ -72,7 +72,7 @@ export default {
                 }
             })
         },
-        test(id, sectionId) {
+        routeToArticle(id, sectionId) {
             this.$router.replace({
                 name: this.$options.static.routerNames[sectionId],
                 params: {id: id}
