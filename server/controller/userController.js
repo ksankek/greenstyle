@@ -98,13 +98,14 @@ class UserController {
     async edit(req, res, next) {
         try {
             const id = req.params.userId;
-            const {firstname, lastname, patronymic, phone} = req.body;
+            const {firstname, lastname, patronymic, phone, role} = req.body;
 
             User.update({
                     firstname: `${firstname}`,
                     lastname: `${lastname}`,
                     patronymic: `${patronymic}`,
-                    phone: `${phone}`
+                    phone: `${phone}`,
+                    role: `${role}`
                 },
                 { where: {id}})
                 .then(() => {

@@ -20,6 +20,8 @@ export default {
                 console.log(res)
                 this.reqGetAllArticles()
             })
+        } else {
+            this.reqGetAllArticles()
         }
     },
     watch: {
@@ -90,6 +92,8 @@ export default {
                     })
                     this.setToastSuccess(res.data.msg)
                 }
+            }).catch(err => {
+                this.setToastError(err.response.data.message)
             })
         },
 

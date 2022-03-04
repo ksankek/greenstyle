@@ -1,5 +1,65 @@
-<div class="page">
+<div class="page admin-page">
     <h1>Админ-панель</h1>
-    <vue-editor v-model="newArticle.description"></vue-editor>
-    <v-btn @click="reqSaveArticle">Save</v-btn>
+    <v-list-group active-class="black-color">
+        <template v-slot:activator>
+            <v-list-item-title>Пользователи</v-list-item-title>
+        </template>
+        <v-dialog
+                v-model="dialogUser"
+                fullscreen
+                hide-overlay
+                transition="dialog-bottom-transition"
+                persistent
+        >
+            <template v-slot:activator="{ on, attrs }">
+                <v-list-item class="list-item cursor-pointer"
+                             v-for="user in users"
+                             v-bind="attrs"
+                             v-on="on"
+                             @click="selectUser(user)">
+                    <v-list-item-title>
+                        <div class="d-flex align-center">
+                            <img v-if="!user.photo"
+                                 class="view__comments-img"
+                                 src="../../assets/no-photo.jpg"
+                                 alt="user-photo">
+                            <img v-else class="view__comments-img" :src="modifiedUserPhoto(user.photo)" alt="user-photo">
+                            <span class="ml-3 mr-3">{{user.email}}</span>
+                            <i class="fa fa-admin" v-if="user.role === 'ADMIN'"></i>
+                            <span v-if="user.id === USER.id" class="ml-3 green-text">(это вы)</span>
+                            <i class="fa fa-trash ml-auto" @click.stop="dialogDelete=true"></i>
+                            <v-dialog v-model="dialogDelete" width="500">
+                                <v-list>
+                                    <div>
+                                        <div class="fa-close ml-auto" @click="dialogDelete = false"></div>
+                                    </div>
+                                    <div class="d-flex flex-column align-items-center">
+                                        <h3>Вы действительно хотите удалить пользователя?</h3>
+                                        <div class="mt-2 d-flex align-center">
+                                            <v-btn outlined @click="reqDeleteUser(user.id)">Да</v-btn>
+                                            <v-btn text @click="dialogDelete = false">Нет</v-btn>
+                                        </div>
+                                    </div>
+                                </v-list>
+                            </v-dialog>
+                        </div>
+                    </v-list-item-title>
+                </v-list-item>
+            </template>
+            <div class="dialog-wrapper">
+                <div class="dialog-wrapper__header d-flex align-center">
+                    <h3>Редактировение пользователя</h3>
+                    <i class="fa fa-close ml-auto" @click="closeDialog('dialogUser')"></i>
+                </div>
+                <template-edit-user :editUser="selectedUser"></template-edit-user>
+            </div>
+        </v-dialog>
+    </v-list-group>
+    <b-toast
+            id="infoToast"
+            toaster="b-toaster-top-full custom-toast"
+            :variant="toastInfo.isSuccess ? 'success' : 'error'"
+            auto-hide-delay="2500">
+        <template v-slot:toast-title>{{toastInfo.message}}</template>
+    </b-toast>
 </div>

@@ -10,13 +10,15 @@ export default {
                 email: '',
                 password: '',
                 confirmPassword: '',
-                role: 'USER'
+                role: 'ADMIN'
             },
             error: {
                 email: false,
                 emailValid: false,
                 password: false,
-                confirmPassword: false
+                passwordValid: false,
+                confirmPassword: false,
+                equalPasswords: false
             }
         }
     },
@@ -24,8 +26,9 @@ export default {
         disabledButton() {
             return this.formData.password === '' ||
                 this.formData.email === '' ||
-                this.formData.password !== this.formData.confirmPassword ||
-                this.error.emailValid
+                this.error.equalPasswords ||
+                this.error.emailValid ||
+                this.error.passwordValid
         }
     },
     methods: {
@@ -58,6 +61,14 @@ export default {
             const mask = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/
             this.error.emailValid = !mask.test(this.formData.email);
             return this.error.emailValid
+        },
+
+        isValidPassword() {
+            this.error.passwordValid = this.formData.password.length < 8
+        },
+
+        isEqualPasswords() {
+            this.error.equalPasswords = this.formData.password !== this.formData.confirmPassword
         }
     }
 }

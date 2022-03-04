@@ -13,7 +13,8 @@ export default {
             error: {
                 email: false,
                 emailValid: false,
-                password: false
+                password: false,
+                passwordValid: false
             }
         }
     },
@@ -21,7 +22,8 @@ export default {
         disabledButton() {
             return this.loginForm.password === '' ||
                 this.loginForm.email === '' ||
-                this.error.emailValid
+                this.error.emailValid ||
+                this.error.passwordValid
         }
     },
     methods: {
@@ -50,6 +52,10 @@ export default {
         isValidEmail() {
             const mask = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/
             this.error.emailValid = !mask.test(this.loginForm.email);
+        },
+
+        isValidPassword() {
+            this.error.passwordValid = this.loginForm.password.length < 8
         }
     }
 }

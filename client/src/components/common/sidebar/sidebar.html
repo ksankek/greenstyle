@@ -29,6 +29,12 @@
             </ul>
         </div>
     </div>
+    <div v-else class="sidebar__profile-block">
+        <div class="d-flex align-center sidebar__login-block">
+            <v-btn outlined @click="$router.push({name: 'LoginPage'})"> Вход </v-btn>
+            <v-btn text @click="$router.push({name: 'RegistrationPage'})"> Регистрация </v-btn>
+        </div>
+    </div>
     <div class="sidebar__links">
         <ul>
             <li v-for="link in NAV_LINKS"

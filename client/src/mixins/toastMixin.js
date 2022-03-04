@@ -10,7 +10,7 @@ export const toastMixin = {
                 isSuccess: true,
                 message: message
             }
-            this.$nextTick().then(this.$bvToast.show('successLogin'))
+            this.$nextTick().then(this.$bvToast.show('infoToast'))
         },
 
         setToastError(message) {
@@ -18,7 +18,7 @@ export const toastMixin = {
                 isSuccess: false,
                 message: message
             }
-            this.$nextTick().then(this.$bvToast.show('successLogin'))
+            this.$nextTick().then(this.$bvToast.show('infoToast'))
         }
     }
 }
