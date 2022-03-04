@@ -1,0 +1,38 @@
+.admin-page {
+    .v-list-group{
+        background-color: $background;
+        border: 1px solid $greyBorder;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .v-list-group__items {
+        max-height: 400px;
+        overflow: auto;
+    }
+
+    .black-color {
+        color: black;
+    }
+
+    .list-item {
+        padding: 10px 10px 10px 50px;
+        transition: background-color 0.3s ease-in-out;
+
+        .fa-trash {
+            display: none;
+        }
+
+        &:hover {
+            background-color: $greyBorder;
+
+            .fa-trash {
+                display: block;
+            }
+        }
+    }
+
+    .green-text {
+        color: $greenHover;
+    }
+}

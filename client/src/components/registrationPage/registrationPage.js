@@ -10,7 +10,7 @@ export default {
                 email: '',
                 password: '',
                 confirmPassword: '',
-                role: 'USER'
+                role: 'ADMIN'
             },
             error: {
                 email: false,
