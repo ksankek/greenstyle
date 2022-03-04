@@ -15,15 +15,15 @@
             >
             </b-form-input>
             <animation :duration="200" :name="'slide-down-fade'" :changeHeight="true">
-                <div class="error-wrapper d-flex align-center" v-if="error.emailValid">
-                    <span class="fa-error mr-1"></span>
-                    <span>Введённая почта не валидна</span>
-                </div>
-            </animation>
-            <animation :duration="200" :name="'slide-down-fade'" :changeHeight="true">
                 <div class="error-wrapper d-flex align-center" v-if="error.email">
                     <span class="fa-error mr-1"></span>
                     <span>Это поле обязательно для заполнения</span>
+                </div>
+            </animation>
+            <animation :duration="200" :name="'slide-down-fade'" :changeHeight="true">
+                <div class="error-wrapper d-flex align-center" v-if="error.emailValid">
+                    <span class="fa-error mr-1"></span>
+                    <span>Введённая почта не валидна</span>
                 </div>
             </animation>
         </div>
@@ -32,16 +32,23 @@
             <b-form-input
                     class="login-page__login-form-field-input"
                     placeholder="Введите пароль"
-                    :class="{'login-page__login-form-field-error':error.password}"
+                    :class="{'login-page__login-form-field-error':error.password,
+                    'login-page__login-form-field-error':error.passwordValid}"
                     type="password"
                     v-model="formData.password"
-                    @blur="isRequired('password')"
+                    @blur="[isRequired('password'), isValidPassword(), isEqualPasswords()]"
             >
             </b-form-input>
             <animation :duration="200" :name="'slide-down-fade'" :changeHeight="true">
                 <div class="error-wrapper d-flex align-center" v-if="error.password">
                     <span class="fa-error mr-1"></span>
                     <span>Это поле обязательно для заполнения</span>
+                </div>
+            </animation>
+            <animation :duration="200" :name="'slide-down-fade'" :changeHeight="true">
+                <div class="error-wrapper d-flex align-center" v-if="error.passwordValid">
+                    <span class="fa-error mr-1"></span>
+                    <span>Пароль должен содержать больше 7 символов</span>
                 </div>
             </animation>
         </div>
@@ -53,13 +60,19 @@
                     v-model="formData.confirmPassword"
                     :class="{'login-page__login-form-field-error':error.confirmPassword}"
                     type="password"
-                    @blur="isRequired('confirmPassword')"
+                    @blur="[isRequired('confirmPassword'), isEqualPasswords()]"
             >
             </b-form-input>
             <animation :duration="200" :name="'slide-down-fade'" :changeHeight="true">
                 <div class="error-wrapper d-flex align-center" v-if="error.confirmPassword">
                     <span class="fa-error mr-1"></span>
                     <span>Это поле обязательно для заполнения</span>
+                </div>
+            </animation>
+            <animation :duration="200" :name="'slide-down-fade'" :changeHeight="true">
+                <div class="error-wrapper d-flex align-center" v-if="error.equalPasswords">
+                    <span class="fa-error mr-1"></span>
+                    <span>Пароли должны совпадать</span>
                 </div>
             </animation>
         </div>
@@ -76,7 +89,7 @@
         </span>
     </div>
     <b-toast
-            id="successLogin"
+            id="infoToast"
             toaster="b-toaster-top-full custom-toast"
             :variant="toastInfo.isSuccess ? 'success' : 'error'"
             auto-hide-delay="2500">

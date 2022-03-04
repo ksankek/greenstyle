@@ -35,13 +35,19 @@
                     placeholder="Введите пароль"
                     type="password"
                     v-model="loginForm.password"
-                    @blur="[isRequired('password'), isValidEmail()]"
+                    @blur="[isRequired('password'), isValidPassword()]"
             >
             </b-form-input>
             <animation :duration="200" :name="'slide-down-fade'" :changeHeight="true">
+                <div class="error-wrapper d-flex align-center" v-if="error.passwordValid">
+                    <span class="fa-error mr-1"></span>
+                    <span>Пароль должен содержать больше 7 символов</span>
+                </div>
+            </animation>
+            <animation :duration="200" :name="'slide-down-fade'" :changeHeight="true">
                 <div class="error-wrapper d-flex align-center" v-if="error.password">
                     <span class="fa-error mr-1"></span>
-                    <span>Введённая почта не валидна</span>
+                    <span>Это поле обязательно для заполнения</span>
                 </div>
             </animation>
         </div>
@@ -61,7 +67,7 @@
         </span>
     </div>
     <b-toast
-            id="successLogin"
+            id="infoToast"
             toaster="b-toaster-top-full custom-toast"
             :variant="toastInfo.isSuccess ? 'success' : 'error'"
             auto-hide-delay="2500">

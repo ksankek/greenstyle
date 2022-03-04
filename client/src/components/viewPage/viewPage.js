@@ -1,9 +1,11 @@
 import { Carousel, Slide } from 'vue-carousel';
 import {mapGetters} from "vuex";
+import {toastMixin} from "@/mixins/toastMixin";
 
 export default {
     name: 'ViewPage',
     components: {Carousel, Slide},
+    mixins: [toastMixin],
     props: {
         id: {
             type: [String, Number],
@@ -69,6 +71,8 @@ export default {
                 if (res.status === 200) {
                     this.reqGetArticle()
                 }
+            }).catch(err => {
+                this.setToastError(err.response.data.message)
             })
         },
         getUsers() {
