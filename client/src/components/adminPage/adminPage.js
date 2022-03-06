@@ -1,10 +1,11 @@
 import {mapGetters} from "vuex";
 import templateEditUser from "@/components/templatePages/templateEditUser.vue";
 import {toastMixin} from "@/mixins/toastMixin";
+import modalConfirm from "@/components/common/modal/modalConfirm.vue";
 
 export default {
     name: 'AdminPage',
-    components: {templateEditUser},
+    components: {templateEditUser, modalConfirm},
     mixins: [toastMixin],
     data() {
         return {
@@ -16,13 +17,16 @@ export default {
             users: [],
             selectedUser: {},
             dialogUser: false,
-            dialogDelete: false
+            dialogConfirm: false
         }
     },
     created() {
         this.reqGetAllUsers()
     },
     mounted() {
+        this.$root.$on('hideModalConfirm', value => {
+            this.dialogConfirm = value
+        })
     },
     watch: {
     },
@@ -67,7 +71,6 @@ export default {
             }).then(res => {
                 if (res.status === 200) {
                     this.reqGetAllUsers()
-                    this.dialogDelete = false
                     this.setToastSuccess(res.data.msg)
                 }
             })
@@ -88,5 +91,8 @@ export default {
                 }
             })
         }
+    },
+    beforeDestroy() {
+        this.$root.$off('hideModalConfirm')
     }
 }

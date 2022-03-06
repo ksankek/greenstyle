@@ -1,4 +1,4 @@
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import {toastMixin} from "@/mixins/toastMixin";
 
 export default {
@@ -30,6 +30,9 @@ export default {
             this.modifiedUser(this.editUser)
             this.adminSwitch = this.editUser.role === 'USER' ? false : true
         }
+    },
+    computed: {
+        ...mapGetters(['USER'])
     },
     methods: {
         ...mapActions(['setUser']),
