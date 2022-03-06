@@ -15,6 +15,9 @@ export default {
                 emailValid: false,
                 password: false,
                 passwordValid: false
+            },
+            visible: {
+                password: false
             }
         }
     },

@@ -19,6 +19,10 @@ export default {
                 passwordValid: false,
                 confirmPassword: false,
                 equalPasswords: false
+            },
+            visible: {
+                password: false,
+                confirm: false
             }
         }
     },

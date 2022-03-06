@@ -29,16 +29,22 @@
         </div>
         <div class="login-page__login-form-field">
             <p class="login-page__login-form-field-title">Пароль</p>
-            <b-form-input
-                    class="login-page__login-form-field-input"
-                    placeholder="Введите пароль"
-                    :class="{'login-page__login-form-field-error':error.password,
-                    'login-page__login-form-field-error':error.passwordValid}"
-                    type="password"
-                    v-model="formData.password"
-                    @blur="[isRequired('password'), isValidPassword(), isEqualPasswords()]"
-            >
-            </b-form-input>
+            <div class="d-flex align-center">
+                <b-form-input
+                        class="login-page__login-form-field-input"
+                        placeholder="Введите пароль"
+                        :class="{'login-page__login-form-field-error':error.password,
+                        'login-page__login-form-field-error':error.passwordValid}"
+                        :type="visible.password ? 'text' : 'password'"
+                        v-model="formData.password"
+                        @blur="[isRequired('password'), isValidPassword(), isEqualPasswords()]"
+                >
+                </b-form-input>
+                <i class="fa ml-3"
+                   :class="{ 'fa-eye':!visible.password, 'fa-eye-close':visible.password }"
+                   @click="visible.password = !visible.password"
+                ></i>
+            </div>
             <animation :duration="200" :name="'slide-down-fade'" :changeHeight="true">
                 <div class="error-wrapper d-flex align-center" v-if="error.password">
                     <span class="fa-error mr-1"></span>
@@ -54,15 +60,21 @@
         </div>
         <div class="login-page__login-form-field">
             <p class="login-page__login-form-field-title">Подтвердите пароль</p>
-            <b-form-input
-                    class="login-page__login-form-field-input"
-                    placeholder="Подтвердите пароль"
-                    v-model="formData.confirmPassword"
-                    :class="{'login-page__login-form-field-error':error.confirmPassword}"
-                    type="password"
-                    @blur="[isRequired('confirmPassword'), isEqualPasswords()]"
-            >
-            </b-form-input>
+            <div class="d-flex align-center">
+                <b-form-input
+                        class="login-page__login-form-field-input"
+                        placeholder="Подтвердите пароль"
+                        v-model="formData.confirmPassword"
+                        :class="{'login-page__login-form-field-error':error.confirmPassword}"
+                        :type="visible.confirm ? 'text' : 'password'"
+                        @blur="[isRequired('confirmPassword'), isEqualPasswords()]"
+                >
+                </b-form-input>
+                <i class="fa ml-3"
+                   :class="{ 'fa-eye':!visible.confirm, 'fa-eye-close':visible.confirm }"
+                   @click="visible.confirm = !visible.confirm"
+                ></i>
+            </div>
             <animation :duration="200" :name="'slide-down-fade'" :changeHeight="true">
                 <div class="error-wrapper d-flex align-center" v-if="error.confirmPassword">
                     <span class="fa-error mr-1"></span>
