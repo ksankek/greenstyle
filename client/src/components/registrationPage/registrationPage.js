@@ -10,7 +10,7 @@ export default {
                 email: '',
                 password: '',
                 confirmPassword: '',
-                role: 'ADMIN'
+                role: 'USER'
             },
             error: {
                 email: false,
@@ -19,6 +19,10 @@ export default {
                 passwordValid: false,
                 confirmPassword: false,
                 equalPasswords: false
+            },
+            visible: {
+                password: false,
+                confirm: false
             }
         }
     },

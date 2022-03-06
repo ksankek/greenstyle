@@ -14,6 +14,7 @@
             <template v-slot:activator="{ on, attrs }">
                 <v-list-item class="list-item cursor-pointer"
                              v-for="user in users"
+                             :key="`${user.id}`"
                              v-bind="attrs"
                              v-on="on"
                              @click="selectUser(user)">
@@ -27,21 +28,7 @@
                             <span class="ml-3 mr-3">{{user.email}}</span>
                             <i class="fa fa-admin" v-if="user.role === 'ADMIN'"></i>
                             <span v-if="user.id === USER.id" class="ml-3 green-text">(это вы)</span>
-                            <i class="fa fa-trash ml-auto" @click.stop="dialogDelete=true"></i>
-                            <v-dialog v-model="dialogDelete" width="500">
-                                <v-list>
-                                    <div>
-                                        <div class="fa-close ml-auto" @click="dialogDelete = false"></div>
-                                    </div>
-                                    <div class="d-flex flex-column align-items-center">
-                                        <h3>Вы действительно хотите удалить пользователя?</h3>
-                                        <div class="mt-2 d-flex align-center">
-                                            <v-btn outlined @click="reqDeleteUser(user.id)">Да</v-btn>
-                                            <v-btn text @click="dialogDelete = false">Нет</v-btn>
-                                        </div>
-                                    </div>
-                                </v-list>
-                            </v-dialog>
+                            <i class="fa fa-trash ml-auto" @click.stop="[dialogConfirm=true, selectUser(user)]"></i>
                         </div>
                     </v-list-item-title>
                 </v-list-item>
@@ -55,6 +42,10 @@
             </div>
         </v-dialog>
     </v-list-group>
+    <modalConfirm :dialogVisible="dialogConfirm"
+                  :modalFunction="reqDeleteUser"
+                  :userId="selectedUser.id">
+    </modalConfirm>
     <b-toast
             id="infoToast"
             toaster="b-toaster-top-full custom-toast"

@@ -87,7 +87,7 @@
                                   v-model="user.phone"></b-form-input>
                 </b-col>
                 <div class="w-100"></div>
-                <b-col cols="2" v-if="!fromProfile">
+                <b-col cols="2" v-if="!fromProfile && editUser.id !== USER.id">
                     <span class="mr-3 d-flex align-center">
                         <v-switch
                                 v-model="adminSwitch"
