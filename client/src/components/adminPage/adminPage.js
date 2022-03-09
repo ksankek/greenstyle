@@ -2,10 +2,11 @@ import {mapGetters} from "vuex";
 import templateEditUser from "@/components/templatePages/templateEditUser.vue";
 import {toastMixin} from "@/mixins/toastMixin";
 import modalConfirm from "@/components/common/modal/modalConfirm.vue";
+import templateEditArticle from "@/components/editArticleTemplate.vue";
 
 export default {
     name: 'AdminPage',
-    components: {templateEditUser, modalConfirm},
+    components: {templateEditUser, modalConfirm, templateEditArticle},
     mixins: [toastMixin],
     data() {
         return {
@@ -17,15 +18,26 @@ export default {
             users: [],
             selectedUser: {},
             dialogUser: false,
-            dialogConfirm: false
+            dialogConfirm: false,
+            articles: [],
+            selectedArticle: {},
+            dialogArticle: false,
+            dialogConfirmArticle: false,
         }
     },
     created() {
         this.reqGetAllUsers()
+        this.reqGetAllArticles()
     },
     mounted() {
         this.$root.$on('hideModalConfirm', value => {
             this.dialogConfirm = value
+            this.dialogConfirmArticle = value
+        })
+
+        this.$root.$on('closeArticleDialog', value => {
+            this.dialogArticle = value
+            this.reqGetAllArticles()
         })
     },
     watch: {
@@ -71,25 +83,46 @@ export default {
             }).then(res => {
                 if (res.status === 200) {
                     this.reqGetAllUsers()
-                    this.setToastSuccess(res.data.msg)
                 }
             })
         },
 
-        reqSaveArticle() {
+        reqGetAllArticles() {
             this.$http({
-                method: 'PUT',
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                url: `http://localhost:5000/api/article/all`
+            }).then(res => {
+                if (res.status === 200) {
+                   this.articles = res.data
+                }
+            })
+        },
+
+        reqDeleteArticle(articleId) {
+            this.$http({
+                method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.token}`
                 },
-                url: `http://localhost:5000/api/article/1`,
-                data: JSON.stringify(this.newArticle)
+                url: `http://localhost:5000/api/article/${articleId}`
             }).then(res => {
                 if (res.status === 200) {
-                    this.article = res.data
+                    this.reqGetAllArticles()
                 }
             })
+        },
+
+        selectArticle(article) {
+            this.selectedArticle = article
+        },
+
+        openCreateArticleForm() {
+            this.selectedArticle = {}
+            this.dialogArticle = true
         }
     },
     beforeDestroy() {

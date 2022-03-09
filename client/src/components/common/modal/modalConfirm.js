@@ -7,7 +7,7 @@ export default {
             default: false
         },
         modalFunction: Function,
-        userId: Number
+        id: Number
     },
     data() {
         return {
