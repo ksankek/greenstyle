@@ -44,10 +44,10 @@ class ArticleController{
     async addComment(req, res, next) {
         try {
             const id = req.params.articleId;
-            const {comment, userId, date} = req.body;
+            const {comment, userId, date, commentId} = req.body;
             await Article.update({
                     comments: Sequelize.fn('array_append', Sequelize.col('comments'),
-                        JSON.stringify({comment, userId, date}))
+                        JSON.stringify({comment, userId, date, commentId}))
                 }, {where: {id:id}}
             ).then(() => {
                 res.status(200).json({msg:"Комментарий добавлен"});
@@ -151,6 +151,32 @@ class ArticleController{
             .catch(err => {
                 res.status(500).json({msg:err});
             })
+    }
+
+    async deleteComment(req, res, next){
+        try{
+            const {articleId, commentId} = req.params;
+
+            let article = await Article.findOne({where: {id:articleId}})
+
+            const comments = article.dataValues.comments.filter(comment => {
+                return comment.commentId !== Number(commentId)
+            })
+
+
+            await Article.update({
+                    comments: comments
+                }, {where: {id:articleId}}
+            ).then(() => {
+                return res.status(200).json({msg:"Комментарий удалён"});
+            })
+                .catch(err => {
+                    return res.status(500).json({msg:err});
+                });
+
+        } catch (e) {
+            next(ApiError.badRequest(e.message));
+        }
     }
 
 }

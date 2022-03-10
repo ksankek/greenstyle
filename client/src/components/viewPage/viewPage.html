@@ -29,6 +29,11 @@
                     <div class="d-flex align-center">
                         <span class="view__comments-name"> {{ getCommentUser(comment.userId, 'fullName') }} </span>
                         <span class="view__comments-date ml-5"> {{ modifiedDate(comment.date) }} </span>
+                        <i v-if="comment.userId === USER.id || USER.role === 'ADMIN'"
+                           class="fa fa-trash ml-5"
+                           @click="reqDeleteComment(comment.commentId)"
+                        >
+                        </i>
                     </div>
                     <p> {{ comment.comment }} </p>
                 </div>

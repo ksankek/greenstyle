@@ -18,7 +18,8 @@ export default {
             commentObj: {
                 comment: ''
             },
-            allUsers: []
+            allUsers: [],
+            lastId: 0
         }
     },
     created() {
@@ -52,12 +53,18 @@ export default {
             }).then(res => {
                 if (res.status === 200) {
                     this.article = res.data
+                    if (this.article?.comments?.length) {
+                        this.article.comments.forEach(comment => {
+                            if (this.lastId <= comment.commentId) this.lastId = comment.commentId
+                        })
+                    }
                 }
             })
         },
         reqSendComment() {
             this.commentObj.userId = this.USER.id;
             this.commentObj.date = new Date()
+            this.commentObj.commentId = ++this.lastId
 
             this.$http({
                 method: 'PUT',
@@ -118,7 +125,24 @@ export default {
         },
         modifiedUserPhoto(photo) {
             return `http://localhost:5000/${photo}`
-        }
+        },
+        reqDeleteComment(commentId) {
+            this.$http({
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.token}`
+                },
+                url: `http://localhost:5000/api/article/comment/${this.id}/${commentId}`
+            }).then(res => {
+                if (res.status === 200) {
+                    this.reqGetArticle()
+                    this.setToastSuccess(res.data.msg)
+                }
+            }).catch(err => {
+                this.setToastError(err.response.data.message)
+            })
+        },
     },
     beforeRouteLeave(to, from, next) {
         console.log(from, to)

@@ -11,6 +11,7 @@ router.get("/:articleId", articleController.getArticleById)
 router.put("/:articleId", checkRole("ADMIN"), articleController.edit);
 router.put("/photo/:articleId", checkRole("ADMIN"), articleController.addPhoto)
 router.put("/comment/:articleId", authMiddleware, articleController.addComment)
+router.delete("/comment/:articleId/:commentId", authMiddleware, articleController.deleteComment)
 router.delete("/:articleId", checkRole("ADMIN"), articleController.delete);
 router.delete("/:articleId/photo/:fileName", checkRole("ADMIN"), articleController.deletePhoto)
 
