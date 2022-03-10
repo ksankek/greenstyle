@@ -3,10 +3,16 @@ import templateEditUser from "@/components/templatePages/templateEditUser.vue";
 import {toastMixin} from "@/mixins/toastMixin";
 import modalConfirm from "@/components/common/modal/modalConfirm.vue";
 import templateEditArticle from "@/components/editArticleTemplate.vue";
+import videoForm from "@/components/createVideoForm.vue";
 
 export default {
     name: 'AdminPage',
-    components: {templateEditUser, modalConfirm, templateEditArticle},
+    components: {
+        templateEditUser,
+        modalConfirm,
+        templateEditArticle,
+        videoForm
+    },
     mixins: [toastMixin],
     data() {
         return {
@@ -23,21 +29,32 @@ export default {
             selectedArticle: {},
             dialogArticle: false,
             dialogConfirmArticle: false,
+            videos: [],
+            selectedVideo: {},
+            dialogVideos: false,
+            dialogConfirmVideos: false
         }
     },
     created() {
         this.reqGetAllUsers()
         this.reqGetAllArticles()
+        this.reqGetAllVideos()
     },
     mounted() {
         this.$root.$on('hideModalConfirm', value => {
             this.dialogConfirm = value
             this.dialogConfirmArticle = value
+            this.dialogConfirmVideos = value
         })
 
         this.$root.$on('closeArticleDialog', value => {
             this.dialogArticle = value
             this.reqGetAllArticles()
+        })
+
+        this.$root.$on('closeVideoDialog', value => {
+            this.dialogVideos = value
+            this.reqGetAllVideos()
         })
     },
     watch: {
@@ -116,6 +133,40 @@ export default {
             })
         },
 
+        reqGetAllVideos() {
+            this.$http({
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.token}`
+                },
+                url: `http://localhost:5000/api/video`
+            }).then(res => {
+                if (res.status === 200) {
+                    this.videos = res.data
+                }
+            })
+        },
+
+        reqDeleteVideo(videoId) {
+            this.$http({
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.token}`
+                },
+                url: `http://localhost:5000/api/video/${videoId}`
+            }).then(res => {
+                if (res.status === 200) {
+                    this.reqGetAllVideos()
+                }
+            })
+        },
+
+        selectVideo(video) {
+            this.selectedVideo = video
+        },
+
         selectArticle(article) {
             this.selectedArticle = article
         },
@@ -127,5 +178,7 @@ export default {
     },
     beforeDestroy() {
         this.$root.$off('hideModalConfirm')
+        this.$root.$off('closeArticleDialog')
+        this.$root.$off('closeVideoDialog')
     }
 }

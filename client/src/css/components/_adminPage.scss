@@ -35,4 +35,13 @@
     .green-text {
         color: $greenHover;
     }
+
+    &__videos {
+        width: 100%;
+        background-color: $background;
+        border: 1px solid $greyBorder;
+        border-radius: 5px;
+        font-weight: bold;
+        padding: 15px;
+    }
 }
