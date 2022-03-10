@@ -181,3 +181,43 @@
         height: 20px;
     }
 }
+
+.editArticle {
+    padding: 20px;
+
+    .editor {
+        min-width: 100%;
+
+        .ql-container {
+            height: auto;
+        }
+    }
+
+    .delete-image__wrapper {
+        transition: opacity 0.2s ease-in-out;
+        position: relative;
+
+        .delete-image {
+            width: 150px;
+            height: 150px;
+        }
+
+        .delete-icon {
+            z-index: 100;
+            left: 30%;
+            width: 60px;
+            height: 60px;
+            top: 30%;
+            position: absolute;
+            display: none;
+        }
+
+        &:hover {
+            opacity: 0.5;
+
+            .delete-icon {
+                display: block;
+            }
+        }
+    }
+}

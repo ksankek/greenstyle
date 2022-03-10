@@ -1,0 +1,19 @@
+<div class="d-flex flex-column">
+    <b-row>
+        <b-col cols="2">
+            <span class="mr-3">Ссылка: </span>
+        </b-col>
+        <b-col cols="10" lg="6">
+            <b-form-input placeholder="Введите ссылку" v-model="videoCreateForm.url"></b-form-input>
+        </b-col>
+        <div class="w-100"></div>
+    </b-row>
+    <v-btn class="mt-5" outlined @click="reqAddVideo">Добавить видео</v-btn>
+    <b-toast
+            id="infoToast"
+            toaster="b-toaster-top-full custom-toast"
+            :variant="toastInfo.isSuccess ? 'success' : 'error'"
+            auto-hide-delay="2500">
+        <template v-slot:toast-title>{{toastInfo.message}}</template>
+    </b-toast>
+</div>

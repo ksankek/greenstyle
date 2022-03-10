@@ -42,15 +42,100 @@
             </div>
         </v-dialog>
     </v-list-group>
+    <div class="mt-5">
+        <v-list-group active-class="black-color">
+            <template v-slot:activator>
+                <v-list-item-title>Статьи</v-list-item-title>
+            </template>
+            <v-list-item class="list-item cursor-pointer"
+                         v-for="article in articles"
+                         :key="`${article.id}`"
+                         @click="[selectArticle(article), dialogArticle = true]">
+                <v-list-item-title>
+                    <div class="d-flex align-center">
+                        <img v-if="!article.files || article.files.length === 0"
+                             class="view__comments-img"
+                             src="../../assets/no-photo.jpg"
+                             alt="article-photo">
+                        <img v-else class="view__comments-img" :src="modifiedUserPhoto(article.files[0])" alt="article-photo">
+                        <span class="ml-3 mr-3">{{article.name}}</span>
+                        <i class="fa fa-trash ml-auto" @click.stop="[dialogConfirmArticle = true, selectArticle(article)]"></i>
+                    </div>
+                </v-list-item-title>
+            </v-list-item>
+            <v-list-item class="list-item cursor-pointer"
+                         @click="openCreateArticleForm">
+                <v-list-item-title>
+                    Написать статью
+                </v-list-item-title>
+            </v-list-item>
+        </v-list-group>
+    </div>
+    <div class="mt-5">
+        <v-list-group active-class="black-color">
+            <template v-slot:activator>
+                <v-list-item-title>Видео</v-list-item-title>
+            </template>
+            <v-list-item class="list-item cursor-pointer"
+                         @click="dialogVideos = true">
+                <v-list-item-title>
+                    Добавить видео
+                </v-list-item-title>
+            </v-list-item>
+            <div v-for="video in videos" class="page__articles-item-wrapper d-flex align-center">
+                <iframe width="300"
+                        height="200"
+                        :key="`${video.id}_${video.url}`"
+                        :src="`${video.url}`"
+                        title="YouTube video player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+                <i class="fa fa-trash ml-5" @click.stop="[dialogConfirmVideos = true, selectVideo(video)]"></i>
+            </div>
+        </v-list-group>
+
+    </div>
     <modalConfirm :dialogVisible="dialogConfirm"
                   :modalFunction="reqDeleteUser"
-                  :userId="selectedUser.id">
+                  :id="selectedUser.id"
+    >
     </modalConfirm>
-    <b-toast
-            id="infoToast"
-            toaster="b-toaster-top-full custom-toast"
-            :variant="toastInfo.isSuccess ? 'success' : 'error'"
-            auto-hide-delay="2500">
-        <template v-slot:toast-title>{{toastInfo.message}}</template>
-    </b-toast>
+    <modalConfirm :dialogVisible="dialogConfirmArticle"
+                  :modalFunction="reqDeleteArticle"
+                  :id="selectedArticle.id"
+    >
+    </modalConfirm>
+    <modalConfirm :dialogVisible="dialogConfirmVideos"
+                  :modalFunction="reqDeleteVideo"
+                  :id="selectedVideo.id"
+    >
+    </modalConfirm>
+    <v-dialog
+            v-model="dialogArticle"
+            hide-overlay
+            transition="dialog-bottom-transition"
+    >
+        <div class="dialog-wrapper">
+            <div class="dialog-wrapper__header d-flex align-center">
+                <h3>Редактировение статьи</h3>
+                <i class="fa fa-close ml-auto" @click="closeDialog('dialogArticle')"></i>
+            </div>
+            <templateEditArticle :article="selectedArticle"></templateEditArticle>
+        </div>
+    </v-dialog>
+    <v-dialog
+            v-model="dialogVideos"
+            hide-overlay
+            transition="dialog-bottom-transition"
+            width="800"
+    >
+        <div class="dialog-wrapper">
+            <div class="dialog-wrapper__header d-flex align-center">
+                <h3>Список видео</h3>
+                <i class="fa fa-close ml-auto" @click="closeDialog('dialogVideos')"></i>
+            </div>
+            <videoForm></videoForm>
+        </div>
+    </v-dialog>
 </div>
