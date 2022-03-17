@@ -62,6 +62,12 @@ const routes = [
     props: true
   },
   {
+    path: '/habits/:id',
+    name: 'HabitsArticle',
+    component: ViewPage,
+    props: true
+  },
+  {
     path: '/admin',
     name: 'AdminPage',
     component: AdminPage
