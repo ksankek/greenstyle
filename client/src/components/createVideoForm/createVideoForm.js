@@ -16,7 +16,12 @@ export default {
         reqAddVideo() {
             const startId = this.videoCreateForm.url.indexOf('v=')
             const endId = this.videoCreateForm.url.indexOf('&')
-            this.videoCreateForm.url = `https://www.youtube.com/embed/${this.videoCreateForm.url.slice(startId + 2, endId)}`
+            if (endId >= 0) {
+                this.videoCreateForm.url = `https://www.youtube.com/embed/${this.videoCreateForm.url.slice(startId + 2, endId)}`
+            } else {
+                this.videoCreateForm.url = `https://www.youtube.com/embed/${this.videoCreateForm.url.slice(startId + 2)}`
+            }
+
 
             this.$http({
                 method: 'POST',

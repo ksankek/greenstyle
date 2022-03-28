@@ -21,15 +21,23 @@ export default {
     name: 'App',
     components: {Sidebar, Search},
     data: () => ({
-        sections: ['Спорт', 'Правильное питание', 'Вредные привычки']
+        sections: ['Спорт', 'Правильное питание', 'Вредные привычки'],
+        sectionsLength: 0,
+        userAdmin: 0
     }),
     mounted() {
-        if (!this.getAllSections.length) {
-            this.sections.forEach(item => {
-                this.setSections(item)
-            })
-        }
-        this.createAdmin()
+        this.getAllSections().then(() => {
+            if (this.sectionsLength === 0) {
+                this.sections.forEach(item => {
+                    this.setSections(item)
+                })
+            }
+        })
+        this.getCheckAllUsers().then(() => {
+            if (this.userAdmin === 0) {
+                this.createAdmin()
+            }
+        })
         this.checkUserLogin()
         this.checkLoginPage()
     },
@@ -47,34 +55,30 @@ export default {
         },
 
         createAdmin() {
-            if (!this.getCheckAllUsers().length) {
-                this.$http({
-                    method: 'POST',
-                    url: `http://localhost:5000/api/user/registration`,
-                    headers: {
-                        'Content-Type': 'application/json; charset=UTF-8'
-                    },
-                    data: JSON.stringify({
-                        role: 'ADMIN',
-                        email: 'admin@gmail.com',
-                        password: '12345678'
-                    })
+            this.$http({
+                method: 'POST',
+                url: `http://localhost:5000/api/user/registration`,
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8'
+                },
+                data: JSON.stringify({
+                    role: 'ADMIN',
+                    email: 'admin@gmail.com',
+                    password: '12345678'
                 })
-            }
+            })
         },
 
         getCheckAllUsers() {
-            let test = []
-            this.$http({
+            return this.$http({
                 method: 'GET',
                 url: `http://localhost:5000/api/user`,
                 headers: {
                     'Content-Type': 'application/json; charset=UTF-8'
                 }
             }).then(res => {
-                test = res.data.filter(({role}) => role === 'ADMIN')
+                this.userAdmin = res.data.filter(({role}) => role === 'ADMIN').length
             })
-            return test
         },
 
         setSections(item) {
@@ -89,17 +93,15 @@ export default {
         },
 
         getAllSections() {
-            let test = []
-            this.$http({
+            return this.$http({
                 method: 'GET',
                 url: `http://localhost:5000/api/section`,
                 headers: {
                     'Content-Type': 'application/json; charset=UTF-8'
                 }
             }).then(res => {
-                test = res.data
+                this.sectionsLength = res.data.length
             })
-            return test
         },
     }
 };

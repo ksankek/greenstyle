@@ -27,7 +27,7 @@ export default {
                 url: `http://localhost:5000/api/video`
             }).then(res => {
                 if (res.status === 200) {
-                    this.videos = res.data
+                    this.videos = res.data.reverse()
                 }
             })
         },

@@ -32,7 +32,8 @@ export default {
             videos: [],
             selectedVideo: {},
             dialogVideos: false,
-            dialogConfirmVideos: false
+            dialogConfirmVideos: false,
+            test: {}
         }
     },
     created() {
@@ -58,11 +59,38 @@ export default {
         })
     },
     watch: {
+        USER: function () {
+            this.reqGetUser().then(data => {
+                console.log(data)
+                if (this.test.role === 'USER') {
+                    this.$router.replace({name:'SportPage'})
+                }
+            })
+        }
     },
     computed: {
-        ...mapGetters(['USER'])
+        ...mapGetters(['USER']),
+
+        sss() {
+            return {id: this.USER.id}
+        }
     },
     methods: {
+        reqGetUser() {
+            return this.$http({
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
+                url: `http://localhost:5000/api/user/${this.sss.id}`
+            }).then(res => {
+                if (res.status === 200) {
+                    this.test = res.data
+                }
+            })
+        },
+
         reqGetAllUsers() {
             this.$http({
                 method: 'GET',
@@ -72,7 +100,7 @@ export default {
                 url: `http://localhost:5000/api/user`
             }).then(res => {
                 if (res.status === 200) {
-                    this.users = res.data
+                    this.users = res.data.reverse()
                 }
             })
         },
@@ -113,7 +141,7 @@ export default {
                 url: `http://localhost:5000/api/article/all`
             }).then(res => {
                 if (res.status === 200) {
-                   this.articles = res.data
+                   this.articles = res.data.reverse()
                 }
             })
         },
@@ -143,7 +171,7 @@ export default {
                 url: `http://localhost:5000/api/video`
             }).then(res => {
                 if (res.status === 200) {
-                    this.videos = res.data
+                    this.videos = res.data.reverse()
                 }
             })
         },
