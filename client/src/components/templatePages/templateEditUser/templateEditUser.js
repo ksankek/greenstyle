@@ -18,7 +18,8 @@ export default {
             },
             dialog: false,
             imageFile: null,
-            adminSwitch: false
+            adminSwitch: false,
+            errorPhone: false
         }
     },
     created() {
@@ -127,6 +128,10 @@ export default {
                     this.modifiedUser(res.data)
                 }
             })
+        },
+        isValidPhone() {
+            const mask = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/
+            this.errorPhone = !mask.test(this.user.phone);
         }
     }
 }

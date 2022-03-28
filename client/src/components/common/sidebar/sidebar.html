@@ -20,7 +20,7 @@
                     @click="$router.replace({path:`${link.route}`}).catch(() => {})"
                 >
                     <span class="mr-3" :class="`fa-${link.icon}`"></span>
-                    <span>{{link.name}}</span>
+                    <span class="sidebar__links-text">{{link.name}}</span>
                     <span v-if="link.icon === 'profile'"
                           class="fa-exit ml-auto"
                           @click.stop="replaceRouter()"
