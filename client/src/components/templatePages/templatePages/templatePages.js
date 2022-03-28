@@ -50,7 +50,7 @@ export default {
                         const favouriteStatus = this.inFavourite.find(({articleId}) => item.id === articleId)
                         item.inFavourite = !!favouriteStatus;
                     })
-                    this.articles = modArticles
+                    this.articles = modArticles.reverse()
                 }
             })
         },
