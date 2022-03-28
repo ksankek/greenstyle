@@ -145,7 +145,7 @@ export default {
         modifiedArticle(article) {
             this.editArticle = {
                 name: article?.name,
-                sectionId: article?.sectionId,
+                sectionId: article?.sectionId || 1,
                 description: article?.description,
                 files: article?.files
             }

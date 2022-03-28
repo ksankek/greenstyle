@@ -84,7 +84,16 @@
                 <b-col cols="10" lg="6">
                     <b-form-input class="login-page__login-form-field-input"
                                   placeholder="Введите телефон"
-                                  v-model="user.phone"></b-form-input>
+                                  v-model="user.phone"
+                                  @blur="isValidPhone"
+                    >
+                    </b-form-input>
+                    <animation :duration="200" :name="'slide-down-fade'" :changeHeight="true">
+                        <div class="error-wrapper d-flex align-center" v-if="errorPhone">
+                            <span class="fa-error mr-1"></span>
+                            <span>Введённый телефон не валиден</span>
+                        </div>
+                    </animation>
                 </b-col>
                 <div class="w-100"></div>
                 <b-col cols="2" v-if="!fromProfile && editUser.id !== USER.id">
